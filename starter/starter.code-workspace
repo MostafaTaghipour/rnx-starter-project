@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"name": "source",
+			"path": "packages/common/src"
+		},
+		{
+			"name": "workspace",
+			"path": "."
+		}
+	],
+	"settings": {
+		"window.zoomLevel": 0,
+		"terminal.integrated.cwd": ".",
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[json]": {
+			"editor.defaultFormatter": "vscode.json-language-features"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "vscode.json-language-features"
+		},
+	}
+}
