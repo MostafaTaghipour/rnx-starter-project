@@ -79,19 +79,20 @@ echo ""
 
 # rename directories and files
 echo "   >>>>>> Rename directories... , please wait"
-find . \( -iname "starter*" ! -iname ".*" \) -type d  -exec bash -c '
-for dirname do
-newname="${dirname/starter/projectName}"
+directories=( `find . \( -iname "projectName*" ! -iname ".*" \) -type d` )
+for dirname in "${directories[@]}"
+do
+newname="${dirname/starter/$projectName}"
 mv "$dirname" "$newname"
 echo "$dirname renamed"
 done
-' _ {} +
 echo ""
 
 echo "   >>>>>> Rename files... , please wait"
-find . \( -iname "starter*" ! -iname ".*" \) -type f  -exec bash -c '
-for filename do
-newname="${filename/starter/projectName}"
+files=( `find . \( -iname "projectName*" ! -iname ".*" \) -type f` )
+for filename in "${files[@]}"
+do
+newname="${filename/starter/$projectName}"
 mv "$filename" "$newname"
 echo "$filename renamed"
 done
