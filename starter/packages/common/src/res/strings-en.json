@@ -1,0 +1,45 @@
+{
+  "empty_text": "No item exist!",
+  "view": "View",
+  "search_placeholder": "Search ...",
+  "picker_place_holder": "Select ...",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "yes": "Yes",
+  "no": "No",
+  "today": "Today",
+  "offline_mode_desc": "You are offline",
+  "welcome_msg": "Welcome to starter!",
+  "error": {
+    "general": "Something wrong!",
+    "required": "This field required",
+    "invalid_email": "Invalid email address",
+    "invalid_password": "Minimum 5 character required",
+    "invalid_form": "Some fields are incorrect"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Login"
+  },
+  "home": {
+    "title": "Home",
+    "button_title": "Go to Details"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "date": "Date",
+    "select_locale": "Select language ...",
+    "select_date": "Select date ...",
+    "persian": "Persian",
+    "english": "English",
+    "night_mode" : "Night mode"
+  },
+  "details": {
+    "title": "Details"
+  },
+  "modal": {
+    "text": "This is a modal!"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@proj/web",
+  "version": "0.0.1",
+  "private": true,
+  "homepage": "./",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build && shx rm -rf dist && mv build dist",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "clean": "shx rm -rf dist && rm -rf node_modules"
+  },
+  "dependencies": {
+    "react": "16.8.4",
+    "react-art": "16.8.4",
+    "react-dom": "16.8.4",
+    "react-native-web": "0.10.1"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.9",
+    "@types/node": "11.10.5",
+    "@types/react": "16.8.7",
+    "@types/react-dom": "16.8.2",
+    "customize-cra": "0.2.12",
+    "react-app-rewired": "2.1.0",
+    "react-scripts": "2.1.8",
+    "typescript": "3.3.3333"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

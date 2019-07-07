@@ -1,0 +1,53 @@
+{
+  "name": "@proj/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "start:reset": "react-native start --reset-cache",
+    "test": "jest",
+    "ios": "react-native run-ios",
+    "ios:release": "react-native run-ios --configuration Release",
+    "ios:bundle": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios",
+    "android": "react-native run-android",
+    "android:release": "react-native run-android --variant=release",
+    "android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/",
+    "android:publish": "cd android && ./gradlew bundleRelease",
+    "tsc": "tsc",
+    "clean": "shx rm -rf ios/build && rm -rf android/build && rm -rf android/app/build && rm -rf node_modules && watchman watch-del-all",
+    "studio": "open -a /Applications/Android\\ Studio.app ./android/",
+    "xcode": "open ios/starter.xcodeproj",
+    "postversion": "react-native-version --never-amend"
+  },
+  "dependencies": {
+    "react-native": "0.59.5"
+  },
+  "devDependencies": {
+    "@types/react-native": "0.57.38",
+    "metro-react-native-babel-preset": "0.53.0",
+    "react-native-version": "^2.6.8"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ]
+  },
+  "rnpm": {
+    "assets": [
+      "../common/src/res/fonts/"
+    ]
+  }
+}
