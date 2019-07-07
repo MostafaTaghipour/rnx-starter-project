@@ -6,6 +6,7 @@ import { ActivityIndicator } from 'react-native';
 import Constant from '@app/configs/const';
 import { NativeToast } from '@app/helpers/uiHelper';
 import R from '@app/res/R';
+import { getAppThemeType, ThemeType } from '@app/configs/theme';
 
 export default class AuthComponent extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -132,7 +133,7 @@ export default class AuthComponent extends React.Component<Props, State> {
 							: ' '}
 					</Text>
 					<Button
-					
+					transparent={getAppThemeType()==ThemeType.Apple}
 						onPress={this.submit}
 						disabled={this.props.inProgress}
 						style={{ alignSelf: 'center', marginTop: 20, paddingStart: 8, paddingEnd: 10 }}

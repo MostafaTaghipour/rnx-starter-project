@@ -102,10 +102,7 @@ export default (variables /*: * */ = variable) => {
       "NativeBase.IconNB": {
         color: variables.brandLight
       },
-      "NativeBase.Text": {
-        color: variables.buttonTransparentByDefault ?  variables.btnDisabledBg : undefined
-      },
-      backgroundColor: variables.buttonTransparentByDefault ? null : variables.btnDisabledBg
+      backgroundColor: variables.btnDisabledBg
     },
     ".bordered": {
       ".dark": {
@@ -322,7 +319,7 @@ export default (variables /*: * */ = variable) => {
       fontFamily: variables.btnFontFamily,
       marginLeft: 0,
       marginRight: 0,
-      color: variables.buttonTransparentByDefault ? variables.btnPrimaryBg : variables.btnPrimaryColor,
+      color: variables.inverseTextColor,
       fontSize: variables.btnTextSize,
       paddingHorizontal: 16,
       backgroundColor: "transparent"
@@ -379,7 +376,7 @@ export default (variables /*: * */ = variable) => {
 
     paddingVertical: variables.buttonPadding,
     // paddingHorizontal: variables.buttonPadding + 10,
-    backgroundColor: variables.buttonTransparentByDefault ? "transparent": variables.btnPrimaryBg,
+    backgroundColor: variables.btnPrimaryBg,
     borderRadius: variables.borderRadiusBase,
     borderColor: variables.btnPrimaryBg,
     borderWidth: null,

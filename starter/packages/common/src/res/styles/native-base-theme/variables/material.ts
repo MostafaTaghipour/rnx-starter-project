@@ -241,6 +241,8 @@ export default {
 	get listItemSelected() {
 		return R.colors.brand;
 	},
+	listSeparatorBackgroundColor:'#F0EFF5',
+	listSeparatorTextColor:'#777',
 
 	// Progress Bar
 	get defaultProgressColor() {
@@ -248,20 +250,23 @@ export default {
 	},
 	inverseProgressColor: '#1A191B',
 
+		// Toast
+		toastBgColor: "rgba(0,0,0,0.8)",
+		toastTextColor: '#fff',
+		
 	// Radio Button
 	radioBtnSize: 23,
+	radioColor: undefined ,
 	get radioSelectedColorAndroid() {
 		return R.colors.brand;
 	},
 	radioBtnLineHeight: 24,
-	get radioColor() {
+	get radioSelectedColor() {
 		return this.brandPrimary;
 	},
 
 	// Segment
-	get segmentBackgroundColor() {
-		return R.colors.brand;
-	},
+	segmentBackgroundColor: 'transparent',
 	segmentActiveBackgroundColor: '#fff',
 	segmentTextColor: '#fff',
 	get segmentActiveTextColor() {

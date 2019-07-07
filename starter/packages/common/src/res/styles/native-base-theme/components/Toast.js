@@ -7,15 +7,27 @@ export default (variables /*: * */ = variable) => {
 
   const toastTheme = {
     ".danger": {
-      backgroundColor: variables.brandDanger
+      backgroundColor: variables.brandDanger,
+      "NativeBase.Text": {
+        color: "#fff",
+        flex: 1
+      },
     },
     ".warning": {
-      backgroundColor: variables.brandWarning
+      backgroundColor: variables.brandWarning,
+      "NativeBase.Text": {
+        color: "#fff",
+        flex: 1
+      },
     },
     ".success": {
-      backgroundColor: variables.brandSuccess
+      backgroundColor: variables.brandSuccess,
+      "NativeBase.Text": {
+        color: "#fff",
+        flex: 1
+      },
     },
-    backgroundColor: "rgba(0,0,0,0.8)",
+    backgroundColor: variables.toastBgColor,
     borderRadius: platform === "ios" ? 5 : 0,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -23,7 +35,7 @@ export default (variables /*: * */ = variable) => {
     padding: 10,
     minHeight: 50,
     "NativeBase.Text": {
-      color: "#fff",
+      color: variables.toastTextColor,
       flex: 1
     },
     "NativeBase.Button": {

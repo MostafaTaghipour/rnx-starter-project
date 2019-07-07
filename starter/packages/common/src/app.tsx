@@ -21,7 +21,6 @@ export default () => (
 	</Provider>
 );
 
-
 /* 
 	Change App Display Name:
 		- packages/mobile/ios/{proj_folder}/info.plist => CFBundleDisplayName
@@ -41,4 +40,13 @@ export default () => (
 		- packages/common/src/screens/splash
 		- packages/mobile/ios/{proj_folder}/Base.lproj/LaunchScreen.xib
 		- packages/mobile/android/app/src/main/res/drawable/background_splash.xml
+
+
+	Change Fonts:
+		- copy fonts in packages/common/src/res/fonts
+		- link assets
+		- define font family in packages/web/custom-font-loader.js
+
+	Icons List:
+		- https://oblador.github.io/react-native-vector-icons/
 */

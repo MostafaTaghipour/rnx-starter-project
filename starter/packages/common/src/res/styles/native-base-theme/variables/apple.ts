@@ -196,14 +196,14 @@ export default {
 	get statusBarColor() {
 		return (
 			color(this.toolbarDefaultBg)
-				// .darken(0.2)
+				.darken(0.2)
 				.hex()
 		);
 	},
 	get darkenHeader() {
 		return (
 			color(this.tabBgColor)
-				// .darken(0.03)
+				.darken(0.03)
 				.hex()
 		);
 	},
@@ -244,6 +244,8 @@ export default {
 	listItemPadding: 10,
 	listNoteColor: '#808080',
 	listNoteSize: 13,
+	listSeparatorBackgroundColor:'#F0EFF5',
+	listSeparatorTextColor:'#777',
 
 	// Progress Bar
 	get defaultProgressColor() {
@@ -251,18 +253,23 @@ export default {
 	},
 	inverseProgressColor: '#1A191B',
 
+	// Toast
+	toastBgColor: "rgba(0,0,0,0.8)",
+	toastTextColor: '#fff',
+
 	// Radio Button
 	radioBtnSize: 25,
+	radioColor: "transparent" ,
 	get radioSelectedColorAndroid() {
 		return R.colors.brand;
 	},
 	radioBtnLineHeight: 29,
-	get radioColor() {
+	get radioSelectedColor() {
 		return this.brandPrimary;
 	},
 
 	// Segment
-	segmentBackgroundColor: '#F8F8F8',
+	segmentBackgroundColor: 'transparent',
 	get segmentActiveBackgroundColor() {
 		return R.colors.brand;
 	},
