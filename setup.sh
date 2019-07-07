@@ -79,7 +79,7 @@ echo ""
 
 # rename directories and files
 echo "   >>>>>> Rename directories... , please wait"
-directories=( `find . \( -iname "projectName*" ! -iname ".*" \) -type d` )
+directories=( `find . \( -iname "starter*" ! -iname ".*" \) -type d` )
 for dirname in "${directories[@]}"
 do
 newname="${dirname/starter/$projectName}"
@@ -89,14 +89,13 @@ done
 echo ""
 
 echo "   >>>>>> Rename files... , please wait"
-files=( `find . \( -iname "projectName*" ! -iname ".*" \) -type f` )
+files=( `find . \( -iname "starter*" ! -iname ".*" \) -type f` )
 for filename in "${files[@]}"
 do
 newname="${filename/starter/$projectName}"
 mv "$filename" "$newname"
 echo "$filename renamed"
 done
-' _ {} +
 echo ""
 
 
