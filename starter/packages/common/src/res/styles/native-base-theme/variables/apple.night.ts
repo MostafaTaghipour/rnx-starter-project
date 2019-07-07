@@ -1,6 +1,7 @@
 // @flow
 // https://github.com/GeekyAnts/native-base-docs/blob/master/docs/Theme.md
-
+// https://codeburst.io/customizing-nativebase-the-missing-examples-part-1-2fff2bdc0120
+// https://codeburst.io/customizing-nativebase-the-missing-examples-part-2-5a4cfcf15414
 import R from '@app/res/R';
 
 const backgroundColor = '#0d0d0d';
