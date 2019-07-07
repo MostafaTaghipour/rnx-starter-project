@@ -1,13 +1,22 @@
-# React Native Starter Project
+# React Native Cross Platform Starter Project (Native, Web, Desktop)
 
-A template for creating a new React Native project with our preferred project organization and default setting.
+A template for creating a new React Native Cross Platform project with our preferred project organization and default setting.
+
+## Platforms
+
+- [x] Native (Android, iOS)  ([thanks React Native](https://github.com/facebook/react-native))
+- [x] Web ([thanks React Native Web](https://github.com/necolas/react-native-web))
+- [x] Desktop ([thanks Electron](https://github.com/electron/electron))
 
 ## Features
 
-- [x] Default folder structure
+- [x] Typescript language
+- [x] Clear project structure 
 - [x] Dependencies
 - [x] Config files
+- [x] Built-in Navigation (Web history API support)
 - [x] Localized Strings file
+- [x] Theme and styles
 
 
 Dependencies:
@@ -21,14 +30,10 @@ Dependencies:
 
 ## Usage
 - Install [React Native](https://facebook.github.io/react-native/docs/getting-started)
-- Install [react-native-rename](https://www.npmjs.com/package/react-native-rename)
-```
-$ npm install react-native-rename -g
-```
 - Clone and setup project
 
 ```
-$ git clone https://github.com/MostafaTaghipour/react-native-starter-project . && sh setup.sh
+$ git clone https://github.com/MostafaTaghipour/rnx-starter-project . && sh setup.sh
 ```
 
 - Answer the questions
@@ -39,6 +44,11 @@ $ git clone https://github.com/MostafaTaghipour/react-native-starter-project . &
 - Wait until the setup of the project and install dependencies are completed
 
 - Enjoy it
+
+## Thanks for
+
+- [react-native-web-monorepo](https://github.com/brunolemos/react-native-web-monorepo)
+- [react-native-plus-web](https://github.com/drgx/react-native-plus-web)
 
 
 ## Author
