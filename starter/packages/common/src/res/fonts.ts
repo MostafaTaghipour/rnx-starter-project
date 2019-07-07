@@ -25,5 +25,5 @@ export default {
 
 function getLatinFont(isMedium: boolean = false): string {
 	if (getAppThemeType() == ThemeType.Apple) return CurrentDevice.Platform.isNative ? 'System' : '';
-	return isMedium ? 'Roboto_medium' : 'Roboto';
+	return isMedium ? 'Roboto-Medium' : 'Roboto';
 }

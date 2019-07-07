@@ -28,7 +28,7 @@ const fontList = {
 	'simple-line-icons': SimpleLineIcons,
 	Zocial,
 	Roboto,
-	Roboto_medium: RobotoMedium,
+	'Roboto-Medium': RobotoMedium,
 	'Vazir-FD': VazirReqular,
 	'Vazir-Medium-FD': VazirMedium,
 	'Vazir-Bold-FD': VazirBold,

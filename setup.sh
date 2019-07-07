@@ -58,24 +58,24 @@ echo ""
 
 # set app id
 echo "   >>>>>> Set App Id... , please wait"
-find . \( ! -iname ".*" \) -type f -print0 | LC_CTYPE=C xargs -0 sed -i '' -e 's/ir.rainyday.rnx.starter/$projectId/g';
+find . \( ! -iname ".*" \) -type f -print0 | LC_CTYPE=C xargs -0 sed -i '' -e "s/ir.rainyday.rnx.starter/$projectId/g";
 cd "$projectDir/packages/mobile/android/app/src/main/java"
 mv ir _t
 mkdir -p "$packagePath"
 cp -r _t/rainyday/rnx/starter/* "$packagePath"
 rm -r _t
+cd "$projectDir"
 echo ""
 
+# set app name
+echo "   >>>>>> Set App name... , please wait"
+find . \( ! -iname ".*" \) -type f -print0 | LC_CTYPE=C xargs -0 sed -i '' -e "s/starter/$projectName/g";
+echo ""
 
 # set android sdk dir
 cd "$projectDir/packages/mobile/android"
 find . -name 'local.properties' -print0 | xargs -0 sed -i "" "s/mostafa-taghipour/$USER/g"
 cd "$projectDir"
-
-# set app name
-echo "   >>>>>> Set App name... , please wait"
-find . \( ! -iname ".*" \) -type f -print0 | LC_CTYPE=C xargs -0 sed -i '' -e 's/starter/$projectName/g';
-echo ""
 
 # rename directories and files
 echo "   >>>>>> Rename directories... , please wait"
