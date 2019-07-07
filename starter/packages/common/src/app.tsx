@@ -23,6 +23,13 @@ export default () => (
 
 
 /* 
+	Change App Display Name:
+		- packages/mobile/ios/{proj_folder}/info.plist => CFBundleDisplayName
+		- packages/mobile/android/app/src/main/res/values/strings.xml => app_name
+		- packages/web/public/index.html => <title> tag
+		- packages/web/public/manifest.json => short_name and name
+		- packages/desktop/package.json => productName
+
 	Change App Icon:
 		- packages/common/src/res/images/app_icon
 		- packages/mobile/ios/{proj_folder}/Images.xcassets

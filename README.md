@@ -6,16 +6,15 @@ A template for creating a new React Native Cross Platform project with our prefe
 
 - [x] Native (Android, iOS)  ([thanks React Native](https://github.com/facebook/react-native))
 - [x] Web ([thanks React Native Web](https://github.com/necolas/react-native-web))
-- [x] Desktop ([thanks Electron](https://github.com/electron/electron))
+- [x] Desktop (macOS, Windows, Linux) ([thanks Electron](https://github.com/electron/electron))
 
 ## Features
 
 - [x] Typescript language
-- [x] Clear project structure 
-- [x] Dependencies
+- [x] Clear project structure & dependencies
 - [x] Config files
-- [x] Built-in Navigation (Web history API support)
-- [x] Localized Strings file
+- [x] Built-in Navigation (Web history support)
+- [x] Multilingual
 - [x] Theme and styles
 
 
@@ -25,6 +24,7 @@ Dependencies:
 - [React Navigation](https://reactnavigation.org)
 - [Redux](https://github.com/reduxjs/redux)
 - [Axiost](https://github.com/axios/axios)
+- [Vector Icons](https://github.com/oblador/react-native-vector-icons)
 
 
 
@@ -57,7 +57,7 @@ Mostafa Taghipour, mostafa@taghipour.me
 
 ## License
 
-Copyright © 2018 Mostafa Taghipour. 
+Copyright © 2019 Mostafa Taghipour. 
 
 [LICENSE]: LICENSE
 
