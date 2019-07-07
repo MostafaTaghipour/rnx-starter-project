@@ -81,7 +81,7 @@ echo ""
 echo "   >>>>>> Rename directories... , please wait"
 find . \( -iname "starter*" ! -iname ".*" \) -type d  -exec bash -c '
 for dirname do
-newname="${dirname/starter/$projectName}"
+newname="${dirname/starter/projectName}"
 mv "$dirname" "$newname"
 echo "$dirname renamed"
 done
@@ -91,7 +91,7 @@ echo ""
 echo "   >>>>>> Rename files... , please wait"
 find . \( -iname "starter*" ! -iname ".*" \) -type f  -exec bash -c '
 for filename do
-newname="${filename/starter/$projectName}"
+newname="${filename/starter/projectName}"
 mv "$filename" "$newname"
 echo "$filename renamed"
 done
