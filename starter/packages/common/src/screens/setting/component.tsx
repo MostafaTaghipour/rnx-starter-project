@@ -19,9 +19,11 @@ import MenuButton from '@app/components/MenuButton';
 import Locale from '@app/configs/locales';
 import DatePickerField from '@app/components/picker/DatePicker';
 import Constant from '@app/configs/const';
-import PickerField from '@app/components/picker/Picker';
+// import PickerField from '@app/components/picker/Picker';
 import R from '@app/res/R';
 import { restartApp } from '@app/helpers/appHelpers';
+import PickerField from '@app/components/picker/Picker';
+
 
 export default class SettingComponent extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -45,7 +47,7 @@ export default class SettingComponent extends React.Component<Props, State> {
 					<Right />
 				</Header>
 				<Content>
-					<Separator />
+					<ListItem itemDivider style={{height:40}}/>
 					<ListItem icon>
 						<Left>
 							<Button style={{ backgroundColor: R.colors.navy }}>
@@ -90,7 +92,7 @@ export default class SettingComponent extends React.Component<Props, State> {
 										? R.strings('settings.persian')
 										: R.strings('settings.english')
 								}
-								onSelect={(index, value) => {
+								onSelect={(index: number, value: string) => {
 									const newLocale =
 										value == R.strings('settings.persian')
 											? Constant.LOCALE_FA
@@ -109,7 +111,7 @@ export default class SettingComponent extends React.Component<Props, State> {
 							/>
 						</Body>
 					</ListItem>
-					<Separator />
+					<ListItem itemDivider style={{height:40}}/>
 					<ListItem icon last>
 						<Left>
 							<Button style={{ backgroundColor: R.colors.orange }}>

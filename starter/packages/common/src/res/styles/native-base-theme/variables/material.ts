@@ -209,6 +209,7 @@ export default {
 	iconFamily: Constant.DEFAULT_ICON_FAMILY,
 	iconFontSize: 28,
 	iconHeaderSize: 24,
+	iconColor: '#000',
 
 	// InputGroup
 	inputFontSize: 17,
@@ -241,8 +242,8 @@ export default {
 	get listItemSelected() {
 		return R.colors.brand;
 	},
-	listSeparatorBackgroundColor:'#F0EFF5',
-	listSeparatorTextColor:'#777',
+	listSeparatorBackgroundColor: '#F0EFF5',
+	listSeparatorTextColor: '#777',
 
 	// Progress Bar
 	get defaultProgressColor() {
@@ -250,13 +251,13 @@ export default {
 	},
 	inverseProgressColor: '#1A191B',
 
-		// Toast
-		toastBgColor: "rgba(0,0,0,0.8)",
-		toastTextColor: '#fff',
-		
+	// Toast
+	toastBgColor: 'rgba(0,0,0,0.8)',
+	toastTextColor: '#fff',
+
 	// Radio Button
 	radioBtnSize: 23,
-	radioColor: undefined ,
+	radioColor: undefined,
 	get radioSelectedColorAndroid() {
 		return R.colors.brand;
 	},
@@ -347,5 +348,14 @@ export default {
 			rightInset: 44,
 			bottomInset: 21,
 		},
+	},
+
+	//Custom.Hr
+	get hrLineHeight(){return this.borderWidth},
+	get hrLineColor() {
+		return R.colors.border;
+	},
+	get hrTextColor() {
+		return R.colors.text;
 	},
 };

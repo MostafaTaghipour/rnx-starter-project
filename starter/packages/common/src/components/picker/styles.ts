@@ -1,9 +1,11 @@
 import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { PickerType } from './types';
-import { getAppThemeType, ThemeType } from '@app/configs/theme';
+import { getAppThemeType, ThemeType, isNightMode } from '@app/configs/theme';
 import CurrentDevice from '@app/configs/device';
 import Locale from '@app/configs/locales';
 import R from '@app/res/R';
+import color from 'color';
+import { isatty } from 'tty';
 
 const isMaterial = getAppThemeType() == ThemeType.Material;
 const brandColor = R.colors.brand;
@@ -52,7 +54,10 @@ export const modalWrapperStyle = (pickerType: PickerType): StyleProp<ViewStyle> 
 	];
 };
 
-export const modalContainerStyle = (pickerType: PickerType): StyleProp<ViewStyle> => {
+export const modalContainerStyle = (
+	pickerType: PickerType,
+	nightMode: boolean
+): StyleProp<ViewStyle> => {
 	return [
 		modalStyles.modalContainer,
 		pickerType == PickerType.dialog
@@ -75,6 +80,29 @@ export const modalContainerStyle = (pickerType: PickerType): StyleProp<ViewStyle
 					height: '100%',
 					width: '100%',
 			  },
+
+		// night mode overrides
+		nightMode && {
+			backgroundColor: isMaterial
+				? R.colors.materialNightSurfaceColor
+				: R.colors.appleNightSurfaceColor,
+			shadowColor: undefined,
+			borderColor: isMaterial ? R.colors.materialNightBorderColor : R.colors.appleNightBorderColor,
+			borderTopColor: isMaterial
+				? R.colors.materialNightBorderColor
+				: R.colors.appleNightBorderColor,
+			borderWidth: StyleSheet.hairlineWidth,
+		},
+	];
+};
+
+export const modalContentSectionStyle = (nightMode: boolean): StyleProp<ViewStyle> => {
+	return [
+		modalStyles.modalContentSection,
+		// night mode overrides
+		nightMode && {
+			backgroundColor: undefined,
+		},
 	];
 };
 
@@ -107,6 +135,18 @@ export const fieldStyle = (): any => {
 		},
 	];
 };
+
+export const fieldPlaceHolderTextColor = (
+	nightMode: boolean
+): string | undefined => {
+	return nightMode
+		? isMaterial
+			? R.colors.materialNightLowLightColor
+			: R.colors.appleNightLowLightColor
+		:  undefined;
+};
+
+
 /* #endregion */
 
 /* #region  picker */
@@ -114,19 +154,16 @@ export const fieldStyle = (): any => {
 const pickerStyles = StyleSheet.create({
 	pickerListItem: {
 		flex: 1,
-		paddingEnd: 16,
-		paddingStart: 16,
-		paddingTop: 8,
-		paddingBottom: 8,
+		padding: 16,
 	},
 	pickerListItemText: {
 		alignSelf: 'flex-start',
 	},
 	pickerTopSection: {
 		flexDirection: 'row',
-		height: toolbarHeight,
 		borderBottomWidth: StyleSheet.hairlineWidth,
 		borderBottomColor: R.colors.border,
+		height: toolbarHeight,
 		borderTopStartRadius: isMaterial ? 0 : cornerRadius,
 		borderTopEndRadius: isMaterial ? 0 : cornerRadius,
 	},
@@ -140,20 +177,41 @@ const pickerStyles = StyleSheet.create({
 	},
 });
 
-export const pickerTopSectionStyle = (pickerType: PickerType): StyleProp<ViewStyle> => {
+export const pickerTopSectionStyle = (
+	pickerType: PickerType,
+	nightMode: boolean
+): StyleProp<ViewStyle> => {
 	return [
 		pickerStyles.pickerTopSection,
 		pickerType == PickerType.modal
 			? {
-					backgroundColor: isMaterial ? brandColor : iosDefaultHeaderColor,
+					backgroundColor: isMaterial
+						? nightMode
+							? R.colors.materialNightSurfaceColor
+							: brandColor
+						: nightMode
+						? R.colors.appleNightSurfaceColor
+						: iosDefaultHeaderColor,
 			  }
 			: {
-					backgroundColor: isMaterial ? bgColor : iosDefaultHeaderColor,
+					backgroundColor: isMaterial
+						? nightMode
+							? R.colors.materialNightSurfaceColor
+							: bgColor
+						: nightMode
+						? R.colors.appleNightSurfaceColor
+						: iosDefaultHeaderColor,
 			  },
+		// night mode overrides
+		nightMode && {
+			borderBottomColor: isMaterial
+				? R.colors.materialNightBorderColor
+				: R.colors.appleNightBorderColor,
+		},
 	];
 };
 
-export const pickerCloseButtonStyle = (pickerType: PickerType): any => {
+export const pickerCloseButtonStyle = (pickerType: PickerType, nightMode: boolean): any => {
 	return [
 		pickerStyles.pickerCloseIcon,
 		pickerType == PickerType.modal
@@ -163,26 +221,58 @@ export const pickerCloseButtonStyle = (pickerType: PickerType): any => {
 			: {
 					color: isMaterial ? R.colors.black : brandColor,
 			  },
+		// night mode overrides
+		nightMode && {
+			color: isMaterial ? R.colors.materialNightLightColor : brandColor,
+		},
 	];
 };
 
-export const pickerSearchField = (pickerType: PickerType): any => {
+export const pickerSearchField = (pickerType: PickerType, nightMode: boolean): any => {
 	return [
 		pickerStyles.pickerSearchField,
-		pickerType == PickerType.modal
-			? {
-					color: isMaterial ? R.colors.inverseText : R.colors.text,
-			  }
-			: {
-					color: R.colors.text,
-			  },
+		{
+			color: isMaterial
+				? pickerType == PickerType.modal
+					? R.colors.inverseText
+					: R.colors.text
+				: R.colors.text,
+		},
+
+		// night mode overrides
+		nightMode && {
+			color: isMaterial ? R.colors.materialNightLightColor : R.colors.appleNightLightColor,
+		},
 	];
 };
 
 export const pickerSearchFieldPlaceHolderTextColor = (
-	pickerType: PickerType
+	pickerType: PickerType,
+	nightMode: boolean
 ): string | undefined => {
-	return pickerType == PickerType.modal && isMaterial ? R.colors.silver : undefined;
+	return nightMode
+		? isMaterial
+			? R.colors.materialNightLowLightColor
+			: R.colors.appleNightLowLightColor
+		: pickerType == PickerType.modal && isMaterial
+		? R.colors.silver
+		: undefined;
+};
+
+export const pickerListItemStyle = (
+	selected: boolean,
+	nightMode: boolean
+): StyleProp<ViewStyle> => {
+	return [
+		pickerStyles.pickerListItem,
+		selected && {
+			backgroundColor: nightMode ? R.colors.brandLighten(0.3) : R.colors.brandLighten(0.8),
+		},
+	];
+};
+
+export const pickerModalSafeAreaInsets = (pickerType: PickerType): any => {
+	return { bottom: 'never', top: pickerType == PickerType.modal ? 'always' : 'never' };
 };
 
 /* #endregion */
@@ -209,7 +299,10 @@ const datePickerStyles = StyleSheet.create({
 	},
 });
 
-export const datePickerTopSectionStyle = (pickerType: PickerType): StyleProp<ViewStyle> => {
+export const datePickerTopSectionStyle = (
+	pickerType: PickerType,
+	nightMode: boolean
+): StyleProp<ViewStyle> => {
 	return [
 		datePickerStyles.datePickerTopSection,
 		pickerType == PickerType.dialog
@@ -237,12 +330,21 @@ export const datePickerTopSectionStyle = (pickerType: PickerType): StyleProp<Vie
 					justifyContent: 'space-between',
 					alignItems: 'center',
 			  },
+		nightMode && {
+			backgroundColor: isMaterial
+				? R.colors.materialNightSurfaceColor
+				: R.colors.appleNightSurfaceColor,
+			borderBottomColor: isMaterial
+				? R.colors.materialNightBorderColor
+				: R.colors.appleNightBorderColor,
+		},
 	];
 };
 
 export const datePickerTopSectionDayTextStyle = (
 	pickerType: PickerType,
-	isActive: boolean
+	isActive: boolean,
+	nightMode: boolean
 ): any => {
 	return [
 		{
@@ -262,12 +364,23 @@ export const datePickerTopSectionDayTextStyle = (
 						? R.colors.black
 						: R.colors.gray,
 			  },
+		// night mode overrides
+		nightMode && {
+			color: isMaterial
+				? isActive
+					? R.colors.materialNightLightColor
+					: R.colors.materialNightLowLightColor
+				: isActive
+				? R.colors.appleNightLightColor
+				: R.colors.appleNightLowLightColor,
+		},
 	];
 };
 
 export const datePickerTopSectionYearTextStyle = (
 	pickerType: PickerType,
-	isActive: boolean
+	isActive: boolean,
+	nightMode: boolean
 ): any => {
 	return [
 		{
@@ -287,10 +400,23 @@ export const datePickerTopSectionYearTextStyle = (
 						? R.colors.black
 						: R.colors.gray,
 			  },
+		// night mode overrides
+		nightMode && {
+			color: isMaterial
+				? isActive
+					? R.colors.materialNightLightColor
+					: R.colors.materialNightLowLightColor
+				: isActive
+				? R.colors.appleNightLightColor
+				: R.colors.appleNightLowLightColor,
+		},
 	];
 };
 
-export const datePickerBottomSectionStyle = (pickerType: PickerType): StyleProp<ViewStyle> => {
+export const datePickerBottomSectionStyle = (
+	pickerType: PickerType,
+	nightMode: boolean
+): StyleProp<ViewStyle> => {
 	return [
 		datePickerStyles.datePickerBottomSection,
 		pickerType == PickerType.dialog
@@ -304,11 +430,16 @@ export const datePickerBottomSectionStyle = (pickerType: PickerType): StyleProp<
 			: {
 					backgroundColor: isMaterial ? bgColor : iosDefaultHeaderColor,
 			  },
+		// night mode overrides
+		nightMode && {
+			borderTopColor: isMaterial
+				? R.colors.materialNightSurfaceColor
+				: R.colors.appleNightBorderColor,
+			backgroundColor: isMaterial
+				? R.colors.materialNightSurfaceColor
+				: R.colors.appleNightSurfaceColor,
+		},
 	];
-};
-
-export const pickerModalSafeAreaInsets = (pickerType: PickerType): any => {
-	return { bottom: 'never', top: pickerType == PickerType.modal ? 'always' : 'never' };
 };
 
 export const datePickerModalSafeAreaInsets = (pickerType: PickerType): any => {

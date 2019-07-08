@@ -13,6 +13,8 @@ import styles, {
 	datePickerTopSectionDayTextStyle,
 	datePickerTopSectionYearTextStyle,
 	fieldStyle,
+	modalContentSectionStyle,
+	fieldPlaceHolderTextColor,
 } from './styles';
 import moment, { Moment } from 'jalali-moment';
 import { CalendarDate, CalenderView } from '@app/components/calendar/types';
@@ -21,6 +23,7 @@ import R from '@app/res/R';
 import Calendar from '@app/components/calendar';
 import Locale from '@app/configs/locales';
 import { showNativeAlert } from '@app/helpers/uiHelper';
+import { isNightMode } from '@app/configs/theme';
 
 //----------------------------------------- Field ------------------------------------
 
@@ -117,7 +120,11 @@ export default class DatePickerField extends React.Component<Props, State> {
 								}
 								style={[fieldStyle(), this.props.fieldStyle]}
 								placeholder={this.props.placeholder}
-								placeholderTextColor={this.props.placeholderTextColor}
+								placeholderTextColor={
+									this.props.placeholderTextColor
+										? this.props.placeholderTextColor
+										: fieldPlaceHolderTextColor(isNightMode())
+								}
 							/>
 						</View>
 						{this.props.iconName ? (
@@ -197,17 +204,17 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 			ok = 'OK',
 			cancel = 'Cancel',
 		} = this.props.navigation.state.params;
-
+		const nightMode = isNightMode();
 		return (
 			<TouchableWithoutFeedback onPress={() => this.finish()}>
 				<View style={modalWrapperStyle(pickerType)}>
 					<TouchableWithoutFeedback onPress={() => null}>
-						<View style={modalContainerStyle(pickerType)}>
+						<View style={modalContainerStyle(pickerType, nightMode)}>
 							<SafeAreaView
 								forceInset={datePickerModalSafeAreaInsets(pickerType)}
 								style={R.styles.flex_1}
 							>
-								<View style={datePickerTopSectionStyle(pickerType)}>
+								<View style={datePickerTopSectionStyle(pickerType, nightMode)}>
 									<TouchableOpacity
 										onPress={() => {
 											if (this.calendarRef.current)
@@ -217,7 +224,8 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 										<Text
 											style={datePickerTopSectionDayTextStyle(
 												pickerType,
-												this.state.currentView != CalenderView.Year
+												this.state.currentView != CalenderView.Year,
+												nightMode
 											)}
 										>
 											{this.state.dateContext
@@ -236,7 +244,8 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 										<Text
 											style={datePickerTopSectionYearTextStyle(
 												pickerType,
-												this.state.currentView == CalenderView.Year
+												this.state.currentView == CalenderView.Year,
+												nightMode
 											)}
 										>
 											{this.state.dateContext
@@ -247,7 +256,7 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 										</Text>
 									</TouchableOpacity>
 								</View>
-								<View style={styles.modalContentSection}>
+								<View style={modalContentSectionStyle(nightMode)}>
 									<Calendar
 										ref={this.calendarRef}
 										selectedDate={this.state.selected}
@@ -259,7 +268,7 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 										onSelectedDate={value => this.setSelectedValue(value)}
 									/>
 								</View>
-								<View style={datePickerBottomSectionStyle(pickerType)}>
+								<View style={datePickerBottomSectionStyle(pickerType, nightMode)}>
 									<Button transparent onPress={() => this.gotoToday()}>
 										<Text>{today}</Text>
 									</Button>

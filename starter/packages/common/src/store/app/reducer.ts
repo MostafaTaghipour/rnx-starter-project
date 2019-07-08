@@ -8,7 +8,7 @@ import CurrentDevice from '@app/configs/device';
 const initialState: AppState = {
 	isConnectToInternet: false,
 	locale: Constant.DEFAULT_LOCALE,
-	nightMode: false,
+	nightMode: Constant.DEFAULT_NIGHT_MODE,
 	isLandscape: CurrentDevice.Dimension.isLandscape,
 	screenSize: CurrentDevice.Dimension.size,
 };

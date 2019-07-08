@@ -44,8 +44,7 @@ import formTheme from './Form';
 import separatorTheme from './Separator';
 import pickerTheme from './Picker';
 import variable from '../variables/apple';
-import customPickerTheme from './CustomPicker';
-import customDatePickerTheme from './CustomDatePicker';
+import customHrTheme from './CustomHr';
 
 export default (variables /*: * */ = variable) => {
 	const theme = {
@@ -216,12 +215,9 @@ export default (variables /*: * */ = variable) => {
 			...thumbnailTheme(variables),
 		},
 
-		'My.CustomPicker': {
-			...customPickerTheme(variable),
-		},
-
-		'My.CustomDatePicker': {
-			...customDatePickerTheme(variable),
+		//custom
+		'Custom.Hr': {
+			...customHrTheme(variables),
 		},
 	};
 

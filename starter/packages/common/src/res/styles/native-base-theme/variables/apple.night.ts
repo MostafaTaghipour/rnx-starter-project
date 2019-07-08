@@ -1,87 +1,90 @@
+import R from "@app/res/R";
+
 // @flow
 // https://github.com/GeekyAnts/native-base-docs/blob/master/docs/Theme.md
 // https://codeburst.io/customizing-nativebase-the-missing-examples-part-1-2fff2bdc0120
 // https://codeburst.io/customizing-nativebase-the-missing-examples-part-2-5a4cfcf15414
-import R from '@app/res/R';
 
-const backgroundColor = '#0d0d0d';
-const surfaceColor = '#161616';
-const textColor = '#fefefe';
-const textSecondaryColor = '#6b6b6b';
-const inverseTextColor = '#000';
-const borderColor = '#2b2b2b';
 
 export default {
 	//Color
-	brandDark: textColor,
-	brandLight: inverseTextColor,
+	get brandDark() { return R.colors.appleNightLightColor},
+	get brandLight() { return R.colors.appleNightDarkColor},
 
 	//Container
-	containerBgColor: backgroundColor,
+	get containerBgColor() { return R.colors.appleNightBackgroundColor},
 
 	//Card
-	cardDefaultBg: surfaceColor,
-	cardBorderColor: borderColor,
+	get cardDefaultBg() { return R.colors.appleNightSurfaceColor},
+	get cardBorderColor() { return R.colors.appleNightBorderColor},
 
 	//Text
-	textColor: textColor,
-	// inverseTextColor: inverseTextColor,
-	defaultTextColor: textColor,
+	get textColor() { return R.colors.appleNightLightColor},
+	// inverseTextColor() { return inverseTextColor},
+	get defaultTextColor() { return R.colors.appleNightLightColor},
 
 	//Header
-	toolbarBtnColor: textColor,
-	toolbarDefaultBg: surfaceColor,
-	toolbarInputColor: textColor,
-	toolbarBtnTextColor: textColor,
-	toolbarBorderColor: borderColor,
+	get toolbarBtnColor() { return R.colors.appleNightLightColor},
+	get toolbarDefaultBg() { return R.colors.appleNightSurfaceColor},
+	get toolbarInputColor() { return R.colors.appleNightLightColor},
+	get toolbarBtnTextColor() { return R.colors.appleNightLightColor},
+	get toolbarBorderColor() { return R.colors.appleNightBorderColor},
 	iosStatusbar: 'light-content',
 
 	//Footer
-	footerDefaultBg: surfaceColor,
-	footerBorderColor: borderColor,
-	tabBarTextColor: textSecondaryColor,
-	activeTab: textColor,
-	sTabBarActiveTextColor: textColor,
-	tabBarActiveTextColor: textColor,
-	tabDefaultBg: surfaceColor,
+	get footerDefaultBg() { return R.colors.appleNightSurfaceColor},
+	get footerBorderColor() { return R.colors.appleNightBorderColor},
+	get tabBarTextColor() { return  R.colors.appleNightLowLightColor},
+	get activeTab() { return R.colors.appleNightLightColor},
+	get sTabBarActiveTextColor() { return R.colors.appleNightLightColor},
+	get tabBarActiveTextColor() { return R.colors.appleNightLightColor},
+	get tabDefaultBg() { return R.colors.appleNightSurfaceColor},
 
 	//Tab
-	topTabBarTextColor: textSecondaryColor,
-	topTabBarActiveTextColor: textColor,
-	topTabBarBorderColor: borderColor,
-	topTabBarActiveBorderColor: borderColor,
-	tabBgColor: surfaceColor,
+	get topTabBarTextColor() { return  R.colors.appleNightLowLightColor},
+	get topTabBarActiveTextColor() { return R.colors.appleNightLightColor},
+	get topTabBarBorderColor() { return R.colors.appleNightBorderColor},
+	get topTabBarActiveBorderColor() { return R.colors.appleNightBorderColor},
+	get tabBgColor() { return R.colors.appleNightSurfaceColor},
 
 	//Title
-	subtitleColor: textSecondaryColor,
-	titleFontColor: textColor,
+	get subtitleColor() { return  R.colors.appleNightLowLightColor},
+	get titleFontColor() { return R.colors.appleNightLightColor},
 
 	// List
-	listBorderColor: borderColor,
-	listDividerBg: borderColor,
-	listBtnUnderlayColor: borderColor,
-	listNoteColor: textSecondaryColor,
-	listSeparatorBackgroundColor: surfaceColor,
-	listSeparatorTextColor: textSecondaryColor,
+	get listBorderColor() { return R.colors.appleNightBorderColor},
+	get listDividerBg() { return R.colors.appleNightBorderColor},
+	get listBtnUnderlayColor() { return R.colors.appleNightBorderColor},
+	get listNoteColor() { return  R.colors.appleNightLowLightColor},
+	get listSeparatorBackgroundColor() { return R.colors.appleNightSurfaceColor},
+	get listSeparatorTextColor() { return  R.colors.appleNightLowLightColor},
 
 	// InputGroup
-	inputBorderColor: borderColor,
-	inputColor: textColor,
+	get inputBorderColor() { return R.colors.appleNightBorderColor},
+	get inputColor() { return R.colors.appleNightLightColor},
 
 	// Radio Button
-	radioColor: textSecondaryColor,
+	get radioColor() { return  R.colors.appleNightLowLightColor},
 
 	// Segment
-	segmentActiveBackgroundColor: textColor,
-	segmentTextColor: textColor,
-	segmentActiveTextColor: inverseTextColor,
-	segmentBorderColor: textColor,
+	get segmentActiveBackgroundColor() { return R.colors.appleNightLightColor},
+	get segmentTextColor() { return R.colors.appleNightLightColor},
+	get segmentActiveTextColor() { return R.colors.appleNightDarkColor},
+	get segmentBorderColor() { return R.colors.appleNightLightColor},
 
 	// Spinner
-	defaultSpinnerColor: textColor,
-	inverseSpinnerColor: inverseTextColor,
+	get defaultSpinnerColor() { return R.colors.appleNightLightColor},
+	get inverseSpinnerColor() { return R.colors.appleNightDarkColor},
 
 	// Toast
-	toastBgColor: textColor,
-	toastTextColor: inverseTextColor,
+	get toastBgColor() { return R.colors.appleNightLightColor},
+	get toastTextColor() { return R.colors.appleNightDarkColor},
+
+	// Icon
+	get iconColor() { return R.colors.appleNightLightColor},
+
+	//Custom.Hr
+	get hrLineColor() {
+		return R.colors.appleNightBorderColor;
+	},
 };

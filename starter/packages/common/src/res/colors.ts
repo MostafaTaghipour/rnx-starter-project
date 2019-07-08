@@ -22,13 +22,29 @@ export default {
 	navy: '#000080',
 	transparent: 'transparent',
 	
-	// add custom font here ...
+	// add custom colors here ...
 	info: '#62B1F6',
 	warning: '#f0ad4e',
 	danger: '#d9534f',
 	success: '#5cb85c',
 	border: '#d9d5dc',
 	brand: '#1E88E5',
+
+	appleNightBackgroundColor : '#0d0d0d',
+	appleNightSurfaceColor :'#161616',
+	appleNightLightColor :'#fefefe',
+	appleNightLowLightColor :'#6b6b6b',
+	appleNightDarkColor : '#000',
+	appleNightBorderColor :'#2b2b2b',
+
+	materialNightBackgroundColor : '#121212',
+	materialNightSurfaceColor :'#1d1d1d',
+	materialNightLightColor :'#e1e1e1',
+	materialNightLowLightColor :'#a0a0a0',
+	materialNightDarkColor : '#000',
+	materialNightBorderColor :'#2b2b2b',
+	
+
 	brandLighten(value: number): string {
 		return color(this.brand)
 			.lighten(value)

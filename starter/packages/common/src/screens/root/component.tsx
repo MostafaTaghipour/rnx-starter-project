@@ -64,7 +64,7 @@ export default class RootComponent extends React.Component<Props, State> {
 
 		return (
 			<Root accessibilityLabel="native-base-root">
-				<StyleProvider style={getAppStyle(true)}>
+				<StyleProvider style={getAppStyle(this.props.nightMode)}>
 					<View style={{ flex: 1 }} onLayout={this.onLayout.bind(this)}>
 						<RootNavigator
 							persistenceKey={Constant.NAVIGATION_PERSIST_KEY}

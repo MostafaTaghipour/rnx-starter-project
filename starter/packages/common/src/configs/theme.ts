@@ -4,6 +4,7 @@ import apple from '@app/res/styles/native-base-theme/variables/apple';
 import materialNight from '@app/res/styles/native-base-theme/variables/material.night';
 import appleNight from '@app/res/styles/native-base-theme/variables/apple.night';
 import getTheme from '@app/res/styles/native-base-theme/components';
+import Constant from './const';
 
 export enum ThemeType {
 	Apple,
@@ -19,7 +20,9 @@ enum ThemeOption {
 const NATIVE_THEME = ThemeOption.BasedOnPlatform;
 const WEB_THEME = NATIVE_THEME;
 
-export function getAppThemeType(): ThemeType {
+let _nightMode = Constant.DEFAULT_NIGHT_MODE
+
+export const getAppThemeType = (): ThemeType => {
 	if (CurrentDevice.Platform.isNative) {
 		if (NATIVE_THEME == ThemeOption.BasedOnPlatform)
 			return CurrentDevice.OS.type === DeviceOS.Mac || CurrentDevice.OS.type === DeviceOS.iOS
@@ -37,12 +40,15 @@ export function getAppThemeType(): ThemeType {
 	}
 }
 
-export function getAppStyle(nightMode: boolean): any {
+export const getAppStyle = (nightMode: boolean): any => {
+	_nightMode = nightMode
 	var theme: any;
 	if (getAppThemeType() === ThemeType.Material) {
-		theme = nightMode ? { ...material, ...materialNight } : material;
+		theme = _nightMode ? { ...material, ...materialNight } : material;
 	} else {
-		theme = nightMode ? { ...apple, ...appleNight } : apple;
+		theme = _nightMode ? { ...apple, ...appleNight } : apple;
 	}
 	return getTheme(theme);
 }
+
+export const isNightMode = ():  boolean => _nightMode

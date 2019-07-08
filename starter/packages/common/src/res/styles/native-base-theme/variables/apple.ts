@@ -6,6 +6,7 @@ import { Platform, Dimensions, PixelRatio } from 'react-native';
 import R from '@app/res/R';
 import Constant from '@app/configs/const';
 import Locale from '@app/configs/locales';
+import CurrentDevice from '@app/configs/device';
 
 const color = require('color');
 const deviceHeight = Dimensions.get('window').height;
@@ -214,6 +215,7 @@ export default {
 	iconFamily: Constant.DEFAULT_ICON_FAMILY,
 	iconFontSize: 30,
 	iconHeaderSize: 33,
+	iconColor: '#000',
 
 	// InputGroup
 	inputFontSize: 17,
@@ -357,4 +359,15 @@ export default {
 			bottomInset: 21,
 		},
 	},
+
+
+		//Custom.Hr
+		get hrLineHeight(){return this.borderWidth},
+		get hrLineColor() {
+			return R.colors.border;
+		},
+		get hrTextColor() {
+			return R.colors.text;
+		},
+	
 };

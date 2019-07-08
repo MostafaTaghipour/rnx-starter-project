@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input, View, Button, Icon, Text , connectStyle } from 'native-base';
+import { Input, View, Button, Icon, Text } from 'native-base';
 import {
 	StyleProp,
 	ViewStyle,
@@ -18,8 +18,12 @@ import styles, {
 	pickerModalSafeAreaInsets,
 	fieldStyle,
 	pickerSearchField,
+	modalContentSectionStyle,
+	pickerListItemStyle,
+	fieldPlaceHolderTextColor,
 } from './styles';
 import R from '@app/res/R';
+import { isNightMode } from '@app/configs/theme';
 
 //----------------------------------------- Field ------------------------------------
 
@@ -39,7 +43,7 @@ interface State {
 	selectedValue?: any;
 }
 
- class PickerField extends React.Component<Props, State> {
+export default class PickerField extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
@@ -58,7 +62,7 @@ interface State {
 			data: d,
 			selectedItem: i,
 			pickerType: t,
-			gesturesEnabled
+			gesturesEnabled,
 		});
 	}
 
@@ -68,9 +72,10 @@ interface State {
 	}
 
 	public render() {
-		const themeStyles = this.props.style;
+		console.log(isNightMode());
+
 		return (
-			<View style={[styles.fieldContainer, this.props.containerStyle , themeStyles.container]}>
+			<View style={[styles.fieldContainer, this.props.containerStyle]}>
 				<TouchableOpacity style={R.styles.flex_1} onPress={() => this.openPicker()}>
 					<View style={[R.styles.row, R.styles.flex_1]} pointerEvents="none">
 						<View style={R.styles.flex_1} pointerEvents="none">
@@ -80,7 +85,11 @@ interface State {
 								value={this.state.selectedValue ? this.state.selectedValue!.toString() : ''}
 								style={[fieldStyle(), this.props.fieldStyle]}
 								placeholder={this.props.placeholder}
-								placeholderTextColor={this.props.placeholderTextColor}
+								placeholderTextColor={
+									this.props.placeholderTextColor
+										? this.props.placeholderTextColor
+										: fieldPlaceHolderTextColor(isNightMode())
+								}
 							/>
 						</View>
 						{this.props.iconName ? (
@@ -93,22 +102,7 @@ interface State {
 	}
 }
 
-const defaultStyles = {
-	container: {
-	  flex: 1,
-	  backgroundColor: 'black',
-	},
-	textContent: {
-	  fontSize: 20,
-	  color: 'white',
-	},
-  };
-  
-  
-  export default connectStyle('My.CustomPicker', defaultStyles)(PickerField);
-
 //----------------------------------------- MODAL ------------------------------------
-
 interface ModalProps {
 	navigation: NavigationScreenProp<any, any>;
 }
@@ -122,10 +116,9 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 	originalData: string[] = [];
 
 	static navigationOptions = ({ navigation }: NavigationScreenProps) => {
-	
 		//@ts-ignore
-		const { gesturesEnabled = true , pickerType = PickerType.modal } = navigation.state.params;
-		
+		const { gesturesEnabled = true, pickerType = PickerType.modal } = navigation.state.params;
+
 		return {
 			gesturesEnabled: gesturesEnabled,
 			gestureDirection: 'default',
@@ -181,14 +174,7 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 
 		return (
 			<TouchableOpacity onPress={() => this.setSelectedValue(item)}>
-				<View
-					style={[
-						styles.pickerListItem,
-						{
-							backgroundColor: selected ? R.colors.brandLighten(0.8) : R.colors.transparent,
-						},
-					]}
-				>
+				<View style={pickerListItemStyle(selected, isNightMode())}>
 					<Text style={styles.pickerListItemText}>{item}</Text>
 				</View>
 			</TouchableOpacity>
@@ -197,35 +183,42 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 
 	render() {
 		const { pickerType = PickerType.modal } = this.props.navigation.state.params;
+		const nightMode = isNightMode();
 
 		return (
 			<TouchableWithoutFeedback onPress={() => this.finish()}>
 				<View style={modalWrapperStyle(pickerType)}>
 					<TouchableWithoutFeedback onPress={() => null}>
-						<View style={modalContainerStyle(pickerType)}>
+						<View style={modalContainerStyle(pickerType, nightMode)}>
 							<SafeAreaView
 								forceInset={pickerModalSafeAreaInsets(pickerType)}
 								style={R.styles.flex_1}
 							>
-								<View style={pickerTopSectionStyle(pickerType)}>
+								<View style={pickerTopSectionStyle(pickerType, nightMode)}>
 									<Button
 										style={R.styles.align_self_center}
 										transparent
 										onPress={() => this.finish()}
 									>
-										<Icon style={pickerCloseButtonStyle(pickerType)} name={R.icons('close')} />
+										<Icon
+											style={pickerCloseButtonStyle(pickerType, nightMode)}
+											name={R.icons('close')}
+										/>
 									</Button>
 									<View style={R.styles.flex_1}>
 										<Input
 											editable={true}
-											style={pickerSearchField(pickerType)}
+											style={pickerSearchField(pickerType, nightMode)}
 											placeholder={R.strings('search_placeholder')}
-											placeholderTextColor={pickerSearchFieldPlaceHolderTextColor(pickerType)}
+											placeholderTextColor={pickerSearchFieldPlaceHolderTextColor(
+												pickerType,
+												nightMode
+											)}
 											onChangeText={text => this.searchFilterFunction(text)}
 										/>
 									</View>
 								</View>
-								<View style={styles.modalContentSection}>
+								<View style={modalContentSectionStyle(nightMode)}>
 									<FlatList
 										style={R.styles.flex_1}
 										keyExtractor={item => item}
