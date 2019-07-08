@@ -1,11 +1,11 @@
 // @flow
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const switchTheme = {
-    marginVertical: -5,
-  };
+	const switchTheme = {
+		marginVertical: -5,
+	};
 
-  return switchTheme;
+	return switchTheme;
 };

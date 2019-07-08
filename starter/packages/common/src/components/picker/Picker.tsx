@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input, View, Button, Icon, Text } from 'native-base';
+import { Input, View, Button, Icon, Text , connectStyle } from 'native-base';
 import {
 	StyleProp,
 	ViewStyle,
@@ -39,7 +39,7 @@ interface State {
 	selectedValue?: any;
 }
 
-export default class PickerField extends React.Component<Props, State> {
+ class PickerField extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
@@ -68,8 +68,9 @@ export default class PickerField extends React.Component<Props, State> {
 	}
 
 	public render() {
+		const themeStyles = this.props.style;
 		return (
-			<View style={[styles.fieldContainer, this.props.containerStyle]}>
+			<View style={[styles.fieldContainer, this.props.containerStyle , themeStyles.container]}>
 				<TouchableOpacity style={R.styles.flex_1} onPress={() => this.openPicker()}>
 					<View style={[R.styles.row, R.styles.flex_1]} pointerEvents="none">
 						<View style={R.styles.flex_1} pointerEvents="none">
@@ -91,6 +92,20 @@ export default class PickerField extends React.Component<Props, State> {
 		);
 	}
 }
+
+const defaultStyles = {
+	container: {
+	  flex: 1,
+	  backgroundColor: 'black',
+	},
+	textContent: {
+	  fontSize: 20,
+	  color: 'white',
+	},
+  };
+  
+  
+  export default connectStyle('My.CustomPicker', defaultStyles)(PickerField);
 
 //----------------------------------------- MODAL ------------------------------------
 

@@ -1,13 +1,13 @@
 // @flow
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const viewTheme = {
-    ".padder": {
-      padding: variables.contentPadding
-    }
-  };
+	const viewTheme = {
+		'.padder': {
+			padding: variables.contentPadding,
+		},
+	};
 
-  return viewTheme;
+	return viewTheme;
 };

@@ -1,9 +1,9 @@
 // @flow
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const pickerTheme = {};
+	const pickerTheme = {};
 
-  return pickerTheme;
+	return pickerTheme;
 };

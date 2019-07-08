@@ -1,12 +1,12 @@
 // @flow
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const iconTheme = {
-    fontSize: variables.iconFontSize,
-    color: "#000"
-  };
+	const iconTheme = {
+		fontSize: variables.iconFontSize,
+		color: '#000',
+	};
 
-  return iconTheme;
+	return iconTheme;
 };

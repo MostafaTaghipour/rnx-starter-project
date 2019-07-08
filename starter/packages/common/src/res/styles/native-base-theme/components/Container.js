@@ -1,16 +1,16 @@
 // @flow
 
-import { Platform, Dimensions } from "react-native";
+import { Platform, Dimensions } from 'react-native';
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
-const deviceHeight = Dimensions.get("window").height;
+const deviceHeight = Dimensions.get('window').height;
 export default (variables /*: * */ = variable) => {
-  const theme = {
-    flex: 1,
-    height: Platform.OS === "ios" ? deviceHeight : deviceHeight - 20,
-    backgroundColor: variables.containerBgColor
-  };
+	const theme = {
+		flex: 1,
+		height: Platform.OS === 'ios' ? deviceHeight : deviceHeight - 20,
+		backgroundColor: variables.containerBgColor,
+	};
 
-  return theme;
+	return theme;
 };

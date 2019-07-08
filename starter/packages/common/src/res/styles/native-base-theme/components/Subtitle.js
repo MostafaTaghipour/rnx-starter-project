@@ -1,18 +1,18 @@
 // @flow
 
-import { Platform } from "react-native";
+import { Platform } from 'react-native';
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const subtitleTheme = {
-    fontSize: variables.subTitleFontSize,
-    fontFamily: variables.titleFontfamily,
-    color: variables.subtitleColor,
-    textAlign: "center",
-    paddingLeft: Platform.OS === "ios" ? 4 : 0,
-    marginLeft: Platform.OS === "ios" ? undefined : -3
-  };
+	const subtitleTheme = {
+		fontSize: variables.subTitleFontSize,
+		fontFamily: variables.titleFontfamily,
+		color: variables.subtitleColor,
+		textAlign: 'center',
+		paddingLeft: Platform.OS === 'ios' ? 4 : 0,
+		marginLeft: Platform.OS === 'ios' ? undefined : -3,
+	};
 
-  return subtitleTheme;
+	return subtitleTheme;
 };

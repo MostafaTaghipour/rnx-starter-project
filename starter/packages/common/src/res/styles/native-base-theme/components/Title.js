@@ -1,20 +1,20 @@
 // @flow
 
-import { Platform } from "react-native";
+import { Platform } from 'react-native';
 
-import variable from "../variables/apple";
+import variable from '../variables/apple';
 
 export default (variables /*: * */ = variable) => {
-  const titleTheme = {
-    fontSize: variables.titleFontSize,
-    fontFamily: variables.titleFontfamily,
-    color: variables.titleFontColor,
-    fontWeight: Platform.OS === "ios" ? "700" : undefined,
-    textAlign: "center",
-    paddingLeft: Platform.OS === "ios" ? 4 : 0,
-    marginLeft: Platform.OS === "ios" ? undefined : -3,
-    paddingTop: 1
-  };
+	const titleTheme = {
+		fontSize: variables.titleFontSize,
+		fontFamily: variables.titleFontfamily,
+		color: variables.titleFontColor,
+		fontWeight: Platform.OS === 'ios' ? '700' : undefined,
+		textAlign: 'center',
+		paddingLeft: Platform.OS === 'ios' ? 4 : 0,
+		marginLeft: Platform.OS === 'ios' ? undefined : -3,
+		paddingTop: 1,
+	};
 
-  return titleTheme;
+	return titleTheme;
 };
