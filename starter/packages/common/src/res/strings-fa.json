@@ -10,12 +10,17 @@
   "today": "امروز",
   "offline_mode_desc": "شما آفلاین هستید",
   "welcome_msg": "خوش آمدید!",
+  "try_again": "تلاش مجدد",
+  "no_item_exist":"هیچ موردی یافت نشد",
   "error": {
+    "no_internet": "شما دسترسی به اینترنت ندارید",
     "general": "خطا رخ داده!",
     "required": "این فیلد الزامی است",
     "invalid_email": "آدرس ایمیل نامعتبر است",
     "invalid_password": "حداقل 5 کاراکتر مورد نیاز است",
-    "invalid_form": "برخی از فیلد ها اشتباه هستند"
+    "invalid_form": "برخی از فیلد ها اشتباه هستند",
+    "loading_error": "دریافت اطلاعات با خطا مواجه شد!",
+    "please_try_again": "لطفاً مجددا تلاش نمایید"
   },
   "auth": {
     "email": "ایمیل",

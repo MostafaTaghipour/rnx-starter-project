@@ -1,7 +1,6 @@
 import NetInfo, { NetInfoSubscription, NetInfoState } from '@react-native-community/netinfo';
 import { store } from '@app/store';
-import { connectivityChanged } from '@app/store/app/actions';
-
+import { setConnectivityStatusAction } from '@app/store/app/actions';
 
 export class Reachability {
 	private unsubscribe?: NetInfoSubscription;
@@ -28,11 +27,11 @@ export class Reachability {
 	}
 
 	private handleConnectionChange(info: NetInfoState) {
-		console.log(info);
+		if (__DEV__) console.log(info);
 	}
 
 	private handleConnectivityChange(isConnected: boolean) {
-		console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
-		store.dispatch(connectivityChanged(isConnected));
+		if (__DEV__) console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
+		store.dispatch(setConnectivityStatusAction(isConnected));
 	}
 }

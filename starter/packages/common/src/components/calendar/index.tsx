@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { View, Text, Button, Icon, Spinner } from 'native-base';
-import { TouchableOpacity } from 'react-native';
 import { styles, calendarArrowIconStyle, calendarTitleStyle, isMaterial } from './styles';
 import moment, { Moment } from 'jalali-moment';
 import {
@@ -18,7 +17,8 @@ import MonthView from './MonthView';
 import YearView from './YearView';
 import Constant from '@app/configs/const';
 import R from '@app/res/R';
-
+import { calenderDateToMoment, yearMonthDayToMoment } from '@app/helpers/dateHelper';
+import TouchableOpacity from '../TouchableOpacity';
 
 interface State {
 	dateContext: Moment;
@@ -62,7 +62,7 @@ export default class Calendar extends React.Component<Props, State> {
 
 	componentDidMount() {
 		// setTimeout(() => {
-			this.init();
+		this.init();
 		// }, 400);
 	}
 
@@ -72,27 +72,13 @@ export default class Calendar extends React.Component<Props, State> {
 			this.locale == Constant.LOCALE_FA ? faWeekdaysShort : moment.weekdaysShort(true);
 		this.months = this.locale == Constant.LOCALE_FA ? faMonths : moment.months();
 		this.minDate = this.props.minDate
-			? moment.from(
-					`${this.props.minDate.year}-${this.props.minDate.month}-${this.props.minDate.day}`,
-					this.locale,
-					defaultDateFormat
-			  )
+			? calenderDateToMoment(this.props.minDate, this.locale)
 			: undefined;
 		this.maxDate = this.props.maxDate
-			? moment.from(
-					`${this.props.maxDate.year}-${this.props.maxDate.month}-${this.props.maxDate.day}`,
-					this.locale,
-					defaultDateFormat
-			  )
+			? calenderDateToMoment(this.props.maxDate, this.locale)
 			: undefined;
 		const selected = this.props.selectedDate
-			? moment.from(
-					`${this.props.selectedDate.year}-${this.props.selectedDate.month}-${
-						this.props.selectedDate.day
-					}`,
-					this.locale,
-					defaultDateFormat
-			  )
+			? calenderDateToMoment(this.props.selectedDate, this.locale)
 			: undefined;
 		const dateContext = selected ? selected : moment();
 		this.setState(prev => ({
@@ -167,12 +153,12 @@ export default class Calendar extends React.Component<Props, State> {
 	private dayItems = (): CalendarDayItem[] => {
 		const res: CalendarDayItem[] = [];
 
-		var key = 0
+		var key = 0;
 		if (this.firthDayOfMonth() < 7)
 			for (let i = 0; i < this.firthDayOfMonth(); i++) {
-				key = key + i
+				key = key + i;
 				res.push({
-					key : key.toString(),
+					key: key.toString(),
 					day: 0,
 					title: '',
 					isSelectable: false,
@@ -198,10 +184,10 @@ export default class Calendar extends React.Component<Props, State> {
 			const disabled =
 				isDisabled || (minIsSameMonth && d < minDay!) || (maxIsSameMonth && d > maxDay!);
 
-				key = key + d;
+			key = key + d;
 
 			res.push({
-				key:key.toString(),
+				key: key.toString(),
 				day: d,
 				title: d.toString(),
 				isSelectable: true,
@@ -361,9 +347,9 @@ export default class Calendar extends React.Component<Props, State> {
 	}
 
 	private setSelectedDate(year: number, month: number, day: number) {
-		const selected = moment.from(`${year}-${month}-${day}`, this.locale, defaultDateFormat);
+		const selected =yearMonthDayToMoment(year,month,day,this.locale)
 
-		if (moment(this.state.selected).isSame(selected, 'day')) return;
+		if (this.state.selected && moment(this.state.selected).isSame(selected, 'day')) return;
 
 		this.setState(prevState => ({
 			...prevState,

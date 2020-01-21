@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+        entryFile: "index.js"
 ]
 
 
@@ -104,6 +104,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "0.0.1"
+        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -130,12 +131,36 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            applicationIdSuffix '.dev'
+            resValue "string", "app_name", "starter (dev)"
+            buildConfigField 'String', 'ENVIRONMENT', '"development"'
+            dimension "default"
+        }
+
+        staging {
+            applicationIdSuffix '.stg'
+            resValue "string", "app_name", "starter (stg)"
+            buildConfigField 'String', 'ENVIRONMENT', '"staging"'
+            dimension "default"
+        }
+
+        production {
+            resValue "string", "app_name", "starter"
+            buildConfigField 'String', 'ENVIRONMENT', '"production"'
+            dimension "default"
+        }
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2, "arm64-v8a": 3]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -154,6 +179,7 @@ dependencies {
     implementation project(':react-native-localize')
     implementation project(':react-native-community-netinfo')
     implementation project(':react-native-restart')
+    androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
 }
 
 // Run this once to be able to run the application with BUCK

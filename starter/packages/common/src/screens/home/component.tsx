@@ -19,9 +19,10 @@ import styles from './style';
 import { FlatList, View, RefreshControl } from 'react-native';
 import MenuButton from '@app/components/MenuButton';
 import { Movie } from '@app/store/movie/types';
-import { BASE_IMAGE_URL } from '@app/configs/webApi';
 import R from '@app/res/R';
-
+import router from '@app/navigators/router';
+import ListContent from '@app/components/ListContent/ListContent';
+import configs from '@app/configs';
 
 export default class HomeComponent extends React.Component<Props, State> {
 	static navigationOptions = ({ navigation }: NavigationScreenProps) => ({
@@ -44,10 +45,10 @@ export default class HomeComponent extends React.Component<Props, State> {
 		this.props.fetchData();
 	}
 
-	renderItems(movie: Movie) {
+	renderItem(movie: Movie, index: number) {
 		return (
 			<View style={{ flex: 1, flexDirection: 'row', padding: 8 }}>
-				<Thumbnail square source={{ uri: BASE_IMAGE_URL + 'w200' + movie.poster_path }} />
+				<Thumbnail square source={{ uri: configs.imgBaseUrl + 'w200' + movie.poster_path }} />
 				<View
 					style={{
 						paddingLeft: 8,
@@ -63,39 +64,27 @@ export default class HomeComponent extends React.Component<Props, State> {
 					</Text>
 				</View>
 
-				<Button
-					transparent
-					onPress={() => this.props.navigation.navigate('details', { id: movie.id })}
-				>
+				<Button transparent onPress={() => router.details(movie.id)}>
 					<Text>{R.strings('view')}</Text>
 				</Button>
 			</View>
 		);
 	}
 	render() {
-		let content = <View />;
-		if (this.props.moviesFetched && this.props.movies.length > 0)
-			content = (
-				<FlatList
-					style={{ width: '100%' }}
-					data={this.props.movies}
-					keyExtractor={item => item.title}
-					renderItem={({ item }) => this.renderItems(item)}
-					showsVerticalScrollIndicator={false}
-					refreshControl={
-						<RefreshControl
-							refreshing={this.props.isFetching}
-							onRefresh={() => this.props.fetchData()}
-						/>
-					}
-				/>
-			);
-		else if (this.props.isFetching && !this.props.moviesFetched) content = <Spinner />;
-		else content = <H3 style={styles.secondaryText}>{R.strings('empty_text')}</H3>;
-
 		return (
 			<Container>
-				<Content scrollEnabled={false} contentContainerStyle={R.styles.containerCenter}>{content}</Content>
+				<ListContent
+					loadData={(page, refresh) => {
+						this.props.fetchData(page, refresh);
+					}}
+					lastLoadedPage={this.props.lastPage}
+					loading={this.props.loading}
+					loaded={this.props.loaded}
+					refreshing={this.props.refreshing}
+					error={this.props.error}
+					data={this.props.data}
+					renderItem={(item, index) => this.renderItem(item, index)}
+				/>
 			</Container>
 		);
 	}

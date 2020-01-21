@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import { View, Text } from 'native-base';
-import { TouchableOpacity, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { calendarDayCellContentStyle, calendarDayCellTextStyle, styles } from './styles';
 import { CalendarDayItem } from './types';
 import { EmptyState } from '@app/types';
+import { weekdays } from 'jalali-moment';
+import TouchableOpacity from '../TouchableOpacity';
 
 interface Props {
 	data: CalendarDayItem[];
@@ -31,14 +33,18 @@ export default class DayView extends React.Component<Props, EmptyState> {
 		);
 	}
 
+
+
+	weekdays = this.props.dayTitles.map(day => {
+		return (
+			<View key={day} style={styles.calendarDayHeaderCell}>
+				<Text style={styles.calendarDayHeaderCellText}>{day}</Text>
+			</View>
+		);
+	});
+
 	public render() {
-		const weekdays = this.props.dayTitles.map(day => {
-			return (
-				<View style={styles.calendarDayHeaderCell}>
-					<Text style={styles.calendarDayHeaderCellText}>{day}</Text>
-				</View>
-			);
-		});
+
 		return (
 			<Fragment>
 				<View style={styles.calendarDayHeader}>{weekdays}</View>
@@ -47,6 +53,7 @@ export default class DayView extends React.Component<Props, EmptyState> {
 					columnWrapperStyle={styles.calendarDayListRow}
 					data={this.props.data}
 					numColumns={7}
+					keyboardShouldPersistTaps={"always"}
 					keyExtractor={(item, index) => item.key}
 					renderItem={({ item, index }) => this.renderDays(item, index)}
 				/>

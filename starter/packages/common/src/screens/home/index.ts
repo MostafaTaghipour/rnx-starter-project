@@ -4,39 +4,43 @@ import { ThunkDispatch } from 'redux-thunk';
 import HomeComponent from './component';
 import { Movie } from '@app/store/movie/types';
 import { AllStates } from '@app/store';
-import { fetchMovieAsync } from '@app/store/movie/actions';
+import { fetchMovieAsyncAction } from '@app/store/movie/actions';
 
 interface OwnProps {
 	navigation: NavigationScreenProp<any, any>;
 }
 
 interface StateProps {
-	movies: Movie[];
-	moviesFetched: boolean;
-	isFetching: boolean;
-	error: any;
+	data: Movie[];
+	error?: any;
+	refreshing: boolean;
+	loading: boolean;
+	loaded: boolean;
+	lastPage: number;
 }
 
 interface DispatchProps {
-	fetchData: () => void;
+	fetchData: (pageNumber?: number, refreshing?: boolean) => void;
 }
 
 export type Props = StateProps & DispatchProps & OwnProps;
 
-export interface State{}
+export interface State {}
 
 const mapState = (state: AllStates): StateProps => {
-	
 	return {
-		movies: state.movie.movies,
-		moviesFetched: state.movie.moviesFetched,
-		isFetching: state.movie.isFetching,
-		error: state.movie.error,
+		data: state.movie.movies.data || [],
+		error: state.movie.movies.error,
+		refreshing: state.movie.movies.refreshing,
+		loading: state.movie.movies.loading,
+		loaded: state.movie.movies.loaded,
+		lastPage: state.movie.movies.page,
 	};
 };
 
 const mapDispatch = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
-	fetchData: () => dispatch(fetchMovieAsync()),
+	fetchData: (pageNumber?: number, refreshing?: boolean) =>
+		dispatch(fetchMovieAsyncAction(pageNumber, refreshing)),
 });
 
 const HomeScreen = connect(

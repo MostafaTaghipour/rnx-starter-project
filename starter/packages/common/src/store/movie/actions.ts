@@ -1,46 +1,71 @@
-
-import { MovieActionTypes, PopularMovies } from './types';
+import { MovieActionTypes, PopularMovies, Movie, MovieActions } from './types';
 import { store } from '@app/store';
-import webApi, { API_KEY } from '@app/configs/webApi';
-import { showToast } from '@app/store/ui/actions';
+import { showToastAction } from '@app/store/ui/actions';
 import R from '@app/res/R';
+import webApi from '@app/net/webApi';
+import {
+	handleHttpError,
+	isConnectToInternet,
+	PaginationRequestState,
+	AsyncActionStatus,
+} from '../helpers';
+import Constant from '@app/configs/const';
+import { HttpError } from '@app/net/types';
+import configs from '@app/configs';
 
+export const fetchMovieAsyncAction = (
+	pageNumber = Constant.PAGINATION_FIRST_PAGE_NUMBER,
+	refreshing = false
+) => {
+	return async (dispatch: any) => {
 
+		
+		if (!isConnectToInternet()) return;
 
-export const fetchMovieAsync = (/*parameter*/) => {
-	return (dispatch: any) => {
-		//@ts-ignore
-		if (!store.getState().app.isConnectToInternet) return;
+		const currentState: PaginationRequestState<Movie[]> = store.getState().movie.movies;
 
-		// loading
-		dispatch({ type: MovieActionTypes.FETCHING_MOVIE });
+		//check if all data loaded
+		if (currentState.data!.length >= currentState.total && !refreshing) return;
 
-		webApi
-			.get<PopularMovies>('popular', {
+		//check if already loading
+		if (currentState.loading || currentState.refreshing) return;
+
+		//check is refreshing ro loading more
+		const page = refreshing ? Constant.PAGINATION_FIRST_PAGE_NUMBER : pageNumber;
+
+		var action: MovieActions = {
+			type: MovieActionTypes.FETCHING_MOVIE,
+			status: AsyncActionStatus.REQUEST,
+			refreshing: refreshing,
+			page: page,
+		};
+		dispatch(action);
+
+		try {
+			const response = await webApi.get<PopularMovies>('popular', {
 				params: {
-					api_key: API_KEY,
+					api_key: configs.apiKey,
+					page: page,
+					pageSize: Constant.PAGINATION_PAGE_SIZE,
 				},
-			})
-			.then(response => {
-				dispatch({
-					type: MovieActionTypes.FETCHING_MOVIE_SUCCESS,
-					payload: response.data.results,
-				});
-			})
-			.catch(error => {
-				console.error(error);
-				// failed
-				dispatch({
-					type: MovieActionTypes.FETCHING_MOVIE_FAILURE,
-					payload: error,
-				});
-
-				dispatch(
-					showToast({
-						text: R.strings('error.general'),
-						type: 'danger',
-					})
-				);
 			});
+
+			action = {
+				...action,
+				status: AsyncActionStatus.SUCCESS,
+				data: response.data && response.data.results ? response.data.results : [],
+				total: response.data ? response.data.total_results : 0,
+			};
+			dispatch(action);
+		} catch (error) {
+			action = {
+				...action,
+				status: AsyncActionStatus.FAILURE,
+				error: error as HttpError,
+			};
+			dispatch(action);
+
+			handleHttpError(error);
+		}
 	};
 };

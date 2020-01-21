@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text } from 'native-base';
-import { TouchableOpacity, FlatList } from 'react-native';
+import {  FlatList } from 'react-native';
 import { styles, calendarYearCellContentStyle, calendarYearCellTextStyle } from './styles';
 import { CalendarYearItem } from './types';
 import { EmptyState } from '@app/types';
+import TouchableOpacity from '../TouchableOpacity';
 
 
 interface Props {
@@ -56,6 +57,7 @@ export default class YearView extends React.Component<Props, EmptyState> {
 					offset: 60 * index,
 					index,
 				})}
+				keyboardShouldPersistTaps={"always"}
 				showsVerticalScrollIndicator={false}
 				showsHorizontalScrollIndicator={false}
 				keyExtractor={item => item.year.toString()}

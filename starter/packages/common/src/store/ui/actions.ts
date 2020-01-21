@@ -3,14 +3,14 @@ import { ToastConfiguration } from '@app/types';
 
 
 
-export const showToast = (toast: ToastConfiguration) : ShowToastAction => {
+export const showToastAction = (toast: ToastConfiguration) : ShowToastAction => {
   return {
     type: UIActionTypes.SHOW_TOAST,
     payload:toast,
   }
 }
 
-export const clearToast = ():ClearToastAction => {
+export const clearToastAction = ():ClearToastAction => {
   return {
     type: UIActionTypes.CLEAR_TOAST,
   }

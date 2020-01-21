@@ -3,7 +3,6 @@ import { Input, View, Button, Icon, Text } from 'native-base';
 import {
 	StyleProp,
 	ViewStyle,
-	TouchableOpacity,
 	TouchableWithoutFeedback,
 	FlatList,
 } from 'react-native';
@@ -24,14 +23,17 @@ import styles, {
 } from './styles';
 import R from '@app/res/R';
 import { isNightMode } from '@app/configs/theme';
+import router from '@app/navigators/router';
+import Constant from '@app/configs/const';
+import TouchableOpacity from '../TouchableOpacity';
 
 //----------------------------------------- Field ------------------------------------
 
 interface ContainerProps {
 	containerStyle?: StyleProp<ViewStyle>;
-	navigation: NavigationScreenProp<any, any>;
 	data: ReadonlyArray<string>;
 	selectedItem?: string;
+	routeName: string;
 	onSelect: (index: number, value: string) => void;
 	pickerType?: 'modal' | 'dialog' | 'bottomSheet';
 	gesturesEnabled?: boolean;
@@ -57,13 +59,7 @@ export default class PickerField extends React.Component<Props, State> {
 		const t = this.props.pickerType;
 		const gesturesEnabled = this.props.gesturesEnabled;
 
-		this.props.navigation.navigate('pickerModal', {
-			returnData: this.returnData.bind(this),
-			data: d,
-			selectedItem: i,
-			pickerType: t,
-			gesturesEnabled,
-		});
+		router.picker(this.props.routeName, d, gesturesEnabled, t, i, this.returnData.bind(this));
 	}
 
 	returnData(index: number, value: string) {
@@ -72,8 +68,7 @@ export default class PickerField extends React.Component<Props, State> {
 	}
 
 	public render() {
-		console.log(isNightMode());
-
+		
 		return (
 			<View style={[styles.fieldContainer, this.props.containerStyle]}>
 				<TouchableOpacity style={R.styles.flex_1} onPress={() => this.openPicker()}>
@@ -173,7 +168,7 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 		const selected = this.state.selectedItem === item;
 
 		return (
-			<TouchableOpacity onPress={() => this.setSelectedValue(item)}>
+			<TouchableOpacity  onPress={() => this.setSelectedValue(item)}>
 				<View style={pickerListItemStyle(selected, isNightMode())}>
 					<Text style={styles.pickerListItemText}>{item}</Text>
 				</View>
@@ -202,7 +197,7 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 									>
 										<Icon
 											style={pickerCloseButtonStyle(pickerType, nightMode)}
-											name={R.icons('close')}
+											name={R.ionIcons('close')}
 										/>
 									</Button>
 									<View style={R.styles.flex_1}>
@@ -223,6 +218,7 @@ export class PickerModalScreen extends React.Component<ModalProps, ModalState> {
 										style={R.styles.flex_1}
 										keyExtractor={item => item}
 										data={this.state.data}
+										keyboardShouldPersistTaps={'always'}
 										renderItem={({ item, index }) => this.renderItem(item)}
 									/>
 								</View>

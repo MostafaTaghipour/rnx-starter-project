@@ -8,12 +8,13 @@ import Locale from '@app/configs/locales';
 import CurrentDevice from '@app/configs/device';
 import { Reachability } from '@app/configs/reachability';
 import { creatRootNavigator } from '@app/navigators/rootNavigator';
-import { getAppStyle } from '@app/configs/theme';
+import { getAppStyle, getAppThemeType } from '@app/configs/theme';
 import Toaster from '@app/components/Toaster';
 import R from '@app/res/R';
 import navigationService from '@app/navigators/navigationService';
 import SplashComponent from '../splash/component';
 import Constant from '@app/configs/const';
+import configs from '@app/configs';
 
 export default class RootComponent extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -27,10 +28,10 @@ export default class RootComponent extends React.Component<Props, State> {
 	}
 
 	componentDidMount() {
+		
 		if (CurrentDevice.Platform.isNative) {
 			SplashScreen.hide();
 		}
-
 		Reachability.getInstance().registerForConnectionChange();
 	}
 
@@ -48,13 +49,11 @@ export default class RootComponent extends React.Component<Props, State> {
 	}
 
 	onLayout(e: LayoutChangeEvent) {
-		const isLandscape = e.nativeEvent.layout.width > e.nativeEvent.layout.height;
-		 this.props.setLandscapeState(isLandscape);
+		const isLandscape = CurrentDevice.Dimension.width > CurrentDevice.Dimension.height;
+		if (this.props.isLandscape != isLandscape) this.props.setLandscapeState(isLandscape);
 
 		const size = CurrentDevice.Dimension.size;
 		if (this.props.screenSize != size) this.props.setScreenSize(size);
-
-
 	}
 
 	render() {
@@ -63,11 +62,15 @@ export default class RootComponent extends React.Component<Props, State> {
 		const RootNavigator = creatRootNavigator(isSignedIn);
 
 		return (
-			<Root accessibilityLabel="native-base-root">
+			<Root accessibilityLabel={this.generateAppInfoString()}>
 				<StyleProvider style={getAppStyle(this.props.nightMode)}>
-					<View style={{ flex: 1 }} onLayout={this.onLayout.bind(this)}>
+					<View
+						accessibilityLabel="root-view"
+						style={{ flex: 1 }}
+						onLayout={this.onLayout.bind(this)}
+					>
 						<RootNavigator
-							persistenceKey={Constant.NAVIGATION_PERSIST_KEY}
+							// persistenceKey={Constant.NAVIGATION_PERSIST_KEY}
 							// renderLoadingExperimental={() => <SplashComponent />}
 							onNavigationStateChange={navigationService.trackingNavigationStateChange}
 							navigatorRef={(navigatorRef: any) =>
@@ -84,5 +87,13 @@ export default class RootComponent extends React.Component<Props, State> {
 				</StyleProvider>
 			</Root>
 		);
+	}
+
+	private generateAppInfoString(): string {
+		return `lang = ${this.props.locale}; direction = ${Locale.isRTL ? 'rtl' : 'ltr'}; platform = ${
+			CurrentDevice.Platform.type
+		}; os = ${CurrentDevice.OS.type}; theme = ${getAppThemeType().toString()}; theme-mode = ${
+			this.props.nightMode ? 'dark' : 'light'
+		};`;
 	}
 }

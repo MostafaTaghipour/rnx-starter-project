@@ -1,7 +1,7 @@
 {
   "name": "workspace",
   "version": "0.0.1",
-  "main": "packages/web/src/index.tsx",
+  "main": "packages/web/src/index.ts",
   "private": true,
   "workspaces": {
     "packages": [
@@ -17,9 +17,9 @@
     ]
   },
   "scripts": {
-    "web": "yarn workspace @proj/web start",
+    "web-start": "yarn workspace @proj/web start",
     "desktop": "yarn workspace @proj/desktop start",
-    "mobile": "yarn workspace @proj/mobile start",
+    "mobile-start": "yarn workspace @proj/mobile start",
     "android": "yarn workspace @proj/mobile android",
     "ios": "yarn workspace @proj/mobile ios",
     "clean": "yarn workspaces run clean && yarn cache clean && shx rm -rf yarn.lock && rm -rf node_modules",
@@ -41,7 +41,6 @@
     "eslint-plugin-react-hooks": "1.4.0",
     "eslint-plugin-react-native": "3.6.0",
     "jest": "23.6.0",
-    "prettier": "1.16.4",
-    "shx": "^0.3.2"
+    "prettier": "1.16.4"
   }
 }

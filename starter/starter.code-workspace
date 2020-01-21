@@ -2,7 +2,20 @@
 	"folders": [
 		{
 			"name": "source",
-			"path": "packages/common/src"
+			"path": "packages/common/src",
+			"visible": false
+		},
+		{
+			"name": "mobile",
+			"path": "packages/mobile"
+		},
+		{
+			"name": "web",
+			"path": "packages/web"
+		},
+		{
+			"name": "desktop",
+			"path": "packages/desktop"
 		},
 		{
 			"name": "workspace",

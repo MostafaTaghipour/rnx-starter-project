@@ -1,19 +1,21 @@
 import { createStackNavigator, NavigationRouteConfigMap } from 'react-navigation';
 import HomeScreen from '@app/screens/home';
 import DetailScreen from '@app/screens/detail';
+import stackConfig from './stackConfig';
+import routeNames from './routeNames';
 
 
 
 const route : NavigationRouteConfigMap = {
-	home: {
+	[routeNames.HOME]: {
 		screen: HomeScreen,
 		path: '',
 	},
-	details: {
+	[routeNames.DETAILS]: {
 		screen: DetailScreen,
 		path: 'detail/:id',
 	},
 };
-export const HomeStack = createStackNavigator(route);
+export const HomeStack = createStackNavigator(route , stackConfig);
 
 

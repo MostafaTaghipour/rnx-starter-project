@@ -29,7 +29,7 @@ export default {
 	androidRipple: true,
 	androidRippleColor: 'rgba(256, 256, 256, 0.3)',
 	androidRippleColorDark: 'rgba(0, 0, 0, 0.15)',
-	btnUppercaseAndroidText: true,
+	// btnUppercaseAndroidText: true,
 
 	// Badge
 	badgeBg: '#ED1727',
@@ -304,8 +304,8 @@ export default {
 	get inverseTextColor() {
 		return R.colors.inverseText;
 	},
-	textAlign: 'auto',
-	textAlignSelf: 'auto',
+	// textAlign: 'auto',
+	// textAlignSelf: 'auto',
 	noteFontSize: 14,
 	get textDirection() {
 		return Locale.isRTL ? 'rtl' : 'ltr';

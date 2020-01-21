@@ -33,12 +33,37 @@ const resolveModule = (resolveFn, filePath) => {
 };
 
 const extraConfigs = config => {
+	const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
 	config.plugins.push(
 		new webpack.DefinePlugin({
-			__DEV__: true,
+			__DEV__: isDev,
 		})
 	);
+
+	const env =
+		process.argv[2] && process.argv[2].startsWith('--')
+			? process.argv[2].split('--')[1]
+			: 'production';
+
+	config.plugins.push(
+		new webpack.DefinePlugin({
+			buildEnvironment: JSON.stringify(env),
+		})
+	);
+
 	config.entry.push(resolveModule(resolveApp, 'custom-font-loader'));
+	return config;
+};
+
+const sourceMapConfigs = config => {
+	const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+	// Load source maps in dev mode
+	if (isDev) {
+		config = { ...config, ...{ devtool: 'cheap-module-eval-source-map' } };
+	}
+
 	return config;
 };
 

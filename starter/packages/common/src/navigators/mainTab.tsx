@@ -8,37 +8,41 @@ import {
 import { HomeStack } from './homeStack';
 import SettingsScreen from '@app/screens/setting';
 import R from '@app/res/R';
-
-
+import routeNames from './routeNames';
+import router from './router';
+import { SettingsStack } from './settingsStack';
+import { View } from 'react-native';
 
 const route: NavigationRouteConfigMap = {
-	home: { screen: HomeStack, path: 'home' },
-	settings: { screen: SettingsScreen, path: 'settings' },
+	[routeNames.HOME]: { screen: HomeStack, path: '' },
+	[routeNames.SETTINGS]: { screen: SettingsStack, path: 'settings' },
 };
 
 const config: BottomTabNavigatorConfig = {
 	tabBarComponent: props => {
 		return (
-			<Footer>
-				<FooterTab>
-					<Button
-						vertical
-						active={props.navigation.state.index === 0}
-						onPress={() => props.navigation.navigate('home')}
-					>
-						<Icon name={R.icons('home')} />
-						<Text >{R.strings('home.title')}</Text>
-					</Button>
-					<Button
-						vertical
-						active={props.navigation.state.index === 1}
-						onPress={() => props.navigation.navigate('settings')}
-					>
-						<Icon name={R.icons('settings')} />
-						<Text>{R.strings('settings.title')}</Text>
-					</Button>
-				</FooterTab>
-			</Footer>
+			<View accessibilityLabel="footer-root">
+				<Footer>
+					<FooterTab>
+						<Button
+							vertical
+							active={props.navigation.state.index === 0}
+							onPress={() => router.home()}
+						>
+							<Icon name={R.ionIcons('home')} />
+							<Text>{R.strings('home.title')}</Text>
+						</Button>
+						<Button
+							vertical
+							active={props.navigation.state.index === 1}
+							onPress={() => router.settings()}
+						>
+							<Icon name={R.ionIcons('settings')} />
+							<Text>{R.strings('settings.title')}</Text>
+						</Button>
+					</FooterTab>
+				</Footer>
+			</View>
 		);
 	},
 };

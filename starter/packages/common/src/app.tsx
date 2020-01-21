@@ -11,17 +11,22 @@ YellowBox.ignoreWarnings([
 	'useNativeDriver',
 	'Functions are not valid as a React child',
 	"Can't perform a React state",
+	'Remote debugger is in a background',
+	'Require cycle',
 ]);
+
+
+
 
 export default () => (
 	<Provider store={store}>
-		<PersistGate loading={() => <SplashComponent />} persistor={persistor}>
+		<PersistGate loading={ <SplashComponent />} persistor={persistor}>
 			<RootScreen />
 		</PersistGate>
 	</Provider>
 );
 
-/* 
+/*
 	Change App Display Name:
 		- packages/mobile/ios/{proj_folder}/info.plist => CFBundleDisplayName
 		- packages/mobile/android/app/src/main/res/values/strings.xml => app_name
@@ -35,7 +40,7 @@ export default () => (
 		- packages/mobile/android/app/src/main/res/mipmap/ic_launcher
 		- packages/web/public/img/icons
 		- packages/desktop/assets/icons
-	
+
 	Change Splash:
 		- packages/common/src/screens/splash
 		- packages/mobile/ios/{proj_folder}/Base.lproj/LaunchScreen.xib

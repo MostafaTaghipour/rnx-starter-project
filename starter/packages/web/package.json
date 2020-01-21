@@ -5,10 +5,14 @@
   "homepage": "./",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && shx rm -rf dist && mv build dist",
+    "start:stg": "react-app-rewired start --staging",
+    "start:dev": "react-app-rewired start --development",
+    "build": "react-app-rewired build && shx rm -rf dist && mv build dist && shx rm -rf build && serve-dist",
+    "build:stg": "react-app-rewired build --staging && shx rm -rf dist && mv build dist && shx rm -rf build && serve-dist",
+    "serve-dist": "http-server dist",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "clean": "shx rm -rf dist && rm -rf node_modules"
+    "clean": "shx rm -rf dist && shx rm -rf build && rm -rf node_modules"
   },
   "dependencies": {
     "react": "16.8.4",
@@ -22,6 +26,7 @@
     "@types/react": "16.8.7",
     "@types/react-dom": "16.8.2",
     "customize-cra": "0.2.12",
+    "http-server": "^0.12.0",
     "react-app-rewired": "2.1.0",
     "react-scripts": "2.1.8",
     "typescript": "3.3.3333"

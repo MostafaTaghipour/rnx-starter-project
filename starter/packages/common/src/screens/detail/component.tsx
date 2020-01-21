@@ -15,15 +15,16 @@ import React from 'react';
 import { Props, State, NavigationProps } from '.';
 import { Image } from 'react-native';
 import BackButton from '@app/components/BackButton';
-import { BASE_IMAGE_URL } from '@app/configs/webApi';
 import commonStyles from '@app/res/styles/common-styles';
+import configs from '@app/configs';
+
 
 export class DetailComponent extends React.Component<Props, State> {
 	static navigationOptions = ({ navigation }: NavigationProps) => ({
 		header: (
 			<Header>
 				<Left>
-					<BackButton navigation={navigation} />
+					<BackButton  />
 				</Left>
 				<Body>
 					<Title>{navigation.state.params ? navigation.state.params.title : ''}</Title>
@@ -51,7 +52,7 @@ export class DetailComponent extends React.Component<Props, State> {
 			content = (
 				<View style={{ flex: 1 }}>
 					<Image
-						source={{ uri: BASE_IMAGE_URL + 'w500' + movie.poster_path }}
+						source={{ uri: configs.imgBaseUrl + 'w500' + movie.poster_path }}
 						style={{ height: 500, width: undefined, flex: 1 }}
 					/>
 					<View style={{ padding: 16 }}>

@@ -7,8 +7,8 @@ import getTheme from '@app/res/styles/native-base-theme/components';
 import Constant from './const';
 
 export enum ThemeType {
-	Apple,
-	Material,
+	Apple = "apple-theme",
+	Material = "material-theme",
 }
 
 enum ThemeOption {

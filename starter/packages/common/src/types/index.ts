@@ -32,3 +32,26 @@ export interface AlertConfiguration {
 	onButtonPress?: () => any;
 }
 
+
+export type iconType =
+	| 'AntDesign'
+	| 'Entypo'
+	| 'EvilIcons'
+	| 'Feather'
+	| 'FontAwesome'
+	| 'FontAwesome5'
+	| 'Foundation'
+	| 'Ionicons'
+	| 'MaterialCommunityIcons'
+	| 'MaterialIcons'
+	| 'Octicons'
+	| 'SimpleLineIcons'
+	| 'Zocial';
+
+
+export type TextAlign = "auto" | "left" | "right" | "center" | "justify"
+export type ItemAlign = "stretch" | "flex-start" | "flex-end" | "enter" | "baseline"
+export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
+export type AlignContent = 'flex-start'| 'flex-end'| 'center'| 'stretch'| 'space-between'| 'space-around'
+export type JustifyContent = 'flex-start'| 'flex-end'| 'center'| 'space-between'| 'space-around'| 'space-evenly'
+

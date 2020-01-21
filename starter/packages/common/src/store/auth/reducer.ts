@@ -1,7 +1,7 @@
 import { AuthState, AuthActionTypes, AuthActions } from './types';
 import { Reducer } from 'redux';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from "redux-persist";
+import { persistReducer, PersistConfig } from "redux-persist";
 
 const initialState: AuthState = {
 	token: undefined,
@@ -34,7 +34,7 @@ const reducer: Reducer<AuthState, AuthActions> = (state = initialState, action) 
 	}
 };
 
-const persistConfig = {
+const persistConfig : PersistConfig = {
 	key: 'auth',
 	storage: storage,
 	blacklist: ['inProcess'],

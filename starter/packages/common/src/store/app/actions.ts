@@ -1,14 +1,14 @@
 import { ScreenSize } from '@app/configs/device';
 import { ConnectivityChangedAction, AppActionTypes } from './types';
 
-export const connectivityChanged = (isConnected: boolean): ConnectivityChangedAction => {
+export const setConnectivityStatusAction = (isConnected: boolean): ConnectivityChangedAction => {
 	return {
 		type: AppActionTypes.CONNECTIVITY_CHANGED,
 		payload: isConnected,
 	};
 };
 
-export const setLocaleAsync = (newLocale: string) => {
+export const setLocaleAction = (newLocale: string) => {
 	return (dispatch: any) => {
 		dispatch({
 			type: AppActionTypes.SET_LOCALE,
@@ -17,7 +17,7 @@ export const setLocaleAsync = (newLocale: string) => {
 	};
 };
 
-export const setNightMode = (nightMode: boolean) => {
+export const setNightModeAction = (nightMode: boolean) => {
 	return (dispatch: any) => {
 		dispatch({
 			type: AppActionTypes.SET_NIGHT_MODE,
@@ -25,7 +25,7 @@ export const setNightMode = (nightMode: boolean) => {
 		});
 	};
 };
-export const setLandscapeState = (isLandscape: boolean) => {
+export const setLandscapeStateAction = (isLandscape: boolean) => {
 	return (dispatch: any) => {
 		dispatch({
 			type: AppActionTypes.SET_LANDSCAPE,
@@ -33,7 +33,7 @@ export const setLandscapeState = (isLandscape: boolean) => {
 		});
 	};
 };
-export const setScreenSize = (screenSize:ScreenSize) => {
+export const setScreenSizeAction = (screenSize:ScreenSize) => {
 	return (dispatch: any) => {
 		dispatch({
 			type: AppActionTypes.SET_SCREEN_SIZE,

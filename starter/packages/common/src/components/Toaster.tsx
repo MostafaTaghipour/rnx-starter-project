@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ToastConfiguration, EmptyState } from '@app/types';
-import { showNativeToast } from '@app/helpers/uiHelper';
+import { showNativeToast } from '@app/helpers/messageHelper';
 import { AllStates } from '@app/store';
-import { clearToast } from '@app/store/ui/actions';
+import { clearToastAction } from '@app/store/ui/actions';
 
 
 interface OwnProps {}
@@ -49,7 +49,7 @@ const mapState = (state: AllStates): StateProps => {
 };
 
 const mapDispatch = (dispatch: Dispatch): DispatchProps => ({
-	clear: () => dispatch(clearToast()),
+	clear: () => dispatch(clearToastAction()),
 });
 
 const Toaster = connect(

@@ -4,7 +4,7 @@ import RootComponent from './component';
 import { Animated } from 'react-native';
 import { AllStates } from '@app/store';
 import { ScreenSize } from '@app/configs/device';
-import { setScreenSize, setLandscapeState } from '@app/store/app/actions';
+import { setScreenSizeAction, setLandscapeStateAction } from '@app/store/app/actions';
 
 interface OwnProps {}
 
@@ -40,8 +40,8 @@ const mapState = (state: AllStates): StateProps => {
 };
 
 const mapDispatch = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
-	setLandscapeState: (isLandscape: boolean) => dispatch(setLandscapeState(isLandscape)),
-	setScreenSize: (screenSize: ScreenSize) => dispatch(setScreenSize(screenSize)),
+	setLandscapeState: (isLandscape: boolean) => dispatch(setLandscapeStateAction(isLandscape)),
+	setScreenSize: (screenSize: ScreenSize) => dispatch(setScreenSizeAction(screenSize)),
 });
 
 const RootScreen = connect(

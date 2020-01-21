@@ -5,12 +5,29 @@ import {
 	NavigationRoute,
 	NavigationState,
 	NavigationAction,
+	NavigationResetActionPayload,
+	StackActions,
 } from 'react-navigation';
 
 let _navigator: NavigationContainerComponent;
 
 function setTopLevelNavigator(navigatorRef: NavigationContainerComponent) {
 	_navigator = navigatorRef;
+}
+
+function getTopLevelNavigator(): Promise<NavigationContainerComponent> {
+	return new Promise(resolve => {
+		if (_navigator) {
+			resolve(_navigator);
+			return;
+		}
+		const interval = setInterval(() => {
+			if (_navigator) {
+				clearInterval(interval);
+				resolve(_navigator);
+			}
+		}, 50);
+	});
 }
 
 function navigate(routeName: string, params?: NavigationParams) {
@@ -20,6 +37,19 @@ function navigate(routeName: string, params?: NavigationParams) {
 			params,
 		})
 	);
+}
+
+function dispatch(action: NavigationAction) {
+	_navigator.dispatch(action);
+}
+
+function resetStack(options: NavigationResetActionPayload) {
+	const resetAction = StackActions.reset(options);
+	_navigator.dispatch(resetAction);
+}
+
+function goBack() {
+	_navigator.dispatch(NavigationActions.back());
 }
 
 function getActiveRoute(
@@ -33,6 +63,26 @@ function getActiveRoute(
 	return route;
 }
 
+function getActiveRouteStack(
+	navigationState: NavigationRoute<NavigationParams> | NavigationState,
+	routeStack: (NavigationRoute<NavigationParams> | NavigationState)[] = []
+): (NavigationRoute<NavigationParams> | NavigationState)[] {
+	const activeRoute = navigationState.routes[navigationState.index];
+
+	if (
+		routeStack.length == 0 ||
+		//@ts-ignore
+		routeStack[routeStack.length - 1].routeName != activeRoute.routeName
+	)
+		routeStack.push(activeRoute);
+
+	if (activeRoute.routes && activeRoute.routes.length > 0) {
+		return getActiveRouteStack(activeRoute, routeStack);
+	}
+
+	return routeStack;
+}
+
 function trackingNavigationStateChange(
 	prevNavigationState: NavigationState,
 	nextNavigationState: NavigationState,
@@ -40,6 +90,12 @@ function trackingNavigationStateChange(
 ) {
 	const currentScreen = getActiveRoute(nextNavigationState);
 	const prevScreen = getActiveRoute(prevNavigationState);
+	const currentRoute = getActiveRouteStack(nextNavigationState);
+
+	if (__DEV__ && (action.type === 'Navigation/NAVIGATE' || action.type === 'Navigation/BACK'))
+		//@ts-ignore
+		console.log(currentRoute.map(x => x.routeName).join(' > '));
+
 	// if (currentScreen.routeName == 'settings') {
 	// 	navigate('home');
 	// }
@@ -48,5 +104,11 @@ function trackingNavigationStateChange(
 export default {
 	navigate,
 	setTopLevelNavigator,
+	getTopLevelNavigator,
 	trackingNavigationStateChange,
+	dispatch,
+	goBack,
+	resetStack,
+	getActiveRoute,
+	getActiveRouteStack,
 };

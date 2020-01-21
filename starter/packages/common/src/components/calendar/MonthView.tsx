@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text } from 'native-base';
-import { TouchableOpacity, FlatList } from 'react-native';
+import {  FlatList } from 'react-native';
 import { styles, calendarMonthCellContentStyle, calendarMonthCellTextStyle } from './styles';
 import { CalendarMonthItem } from './types';
 import { EmptyState } from '@app/types';
+import TouchableOpacity from '../TouchableOpacity';
 
 
 
@@ -40,6 +41,7 @@ export default class MonthView extends React.Component<Props, EmptyState> {
 					columnWrapperStyle={styles.calendarMonthListRow}
 					data={this.props.data}
 					numColumns={3}
+					keyboardShouldPersistTaps={"always"}
 					keyExtractor={(item) => item.title}
 					renderItem={({ item }) => this.renderMonths(item)}
 				/>

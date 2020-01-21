@@ -1,4 +1,12 @@
 import { Action } from 'redux';
+import { PaginationRequestState, ApiPaginationAction } from '../helpers';
+
+export interface PopularMovies {
+	page: number;
+	results: Movie[];
+	total_pages: number;
+	total_results: number;
+}
 
 export interface Movie {
 	id: number;
@@ -10,32 +18,16 @@ export interface Movie {
 	backdrop_path: string;
 }
 
-export interface PopularMovies {
-	results: Movie[];
-}
-
 export interface MovieState {
-	movies: Movie[];
-	moviesFetched: boolean;
-	isFetching: boolean;
-	error: any;
+	movies: PaginationRequestState<Movie[]>;
 }
 
 // actions
 export enum MovieActionTypes {
 	FETCHING_MOVIE = 'FETCHING_MOVIE',
-	FETCHING_MOVIE_SUCCESS = 'FETCHING_MOVIE_SUCCESS',
-	FETCHING_MOVIE_FAILURE = 'FETCHING_MOVIE_FAILURE',
 }
 
-export interface FetchingMoviesAction extends Action<MovieActionTypes.FETCHING_MOVIE> {}
+export interface FetchingMoviesAction
+	extends ApiPaginationAction<MovieActionTypes.FETCHING_MOVIE, Movie[]> {}
 
-export interface FetchingMoviesSuccessAction extends Action<MovieActionTypes.FETCHING_MOVIE_SUCCESS>{
-	payload: Movie[];
-}
-
-export interface FetchingMoviesFailureAction extends Action<MovieActionTypes.FETCHING_MOVIE_FAILURE>{
-	payload: any;
-}
-
-export type MovieActions = FetchingMoviesAction | FetchingMoviesSuccessAction | FetchingMoviesFailureAction;
+export type MovieActions = FetchingMoviesAction;

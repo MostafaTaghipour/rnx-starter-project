@@ -22,6 +22,32 @@ body, html, #root {
 }
 
 /* resolve native base 'Root' element issue */
-[aria-label="native-base-root"] > div[style*="border-color: rgb(255, 0, 0);"]{
+[aria-label="root-view"] ~ div:not([style*='opacity']){
   display: none!important;
  }
+
+
+/* resolve tab bar opacity issue */
+div[style=""]{
+  opacity: 1!important;
+ }
+
+
+/* ScrollBar in dark mode */
+div[aria-label*="theme-mode = dark"] div::-webkit-scrollbar {
+  width: 12px;
+}
+
+div[aria-label*="theme-mode = dark"] div::-webkit-scrollbar-track {
+  background: #292929; 
+}
+ 
+div[aria-label*="theme-mode = dark"] div::-webkit-scrollbar-thumb {
+  background: #0c0c0c; 
+  border:1px solid #292929;
+}
+
+div[aria-label*="theme = apple-theme; theme-mode = dark;"] div::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+}
+

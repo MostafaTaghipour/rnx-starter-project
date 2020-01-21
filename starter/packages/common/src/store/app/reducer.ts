@@ -2,11 +2,11 @@ import { AppState, AppActions, AppActionTypes } from './types';
 import { Reducer } from 'redux';
 import Constant from '@app/configs/const';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import { persistReducer, PersistConfig } from 'redux-persist';
 import CurrentDevice from '@app/configs/device';
 
 const initialState: AppState = {
-	isConnectToInternet: false,
+	isConnectToInternet: true,
 	locale: Constant.DEFAULT_LOCALE,
 	nightMode: Constant.DEFAULT_NIGHT_MODE,
 	isLandscape: CurrentDevice.Dimension.isLandscape,
@@ -47,7 +47,7 @@ const reducer: Reducer<AppState, AppActions> = (state = initialState, action) =>
 	}
 };
 
-const persistConfig = {
+const persistConfig : PersistConfig = {
 	key: 'app',
 	storage: storage,
 	blacklist: ['isConnectToInternet'],

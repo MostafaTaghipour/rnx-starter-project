@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AuthComponent from './component';
 import { SignInModel } from '@app/store/auth/types';
 import { AllStates } from '@app/store';
-import { signInAsync } from '@app/store/auth/actions';
+import { signInAsyncAction } from '@app/store/auth/actions';
 
 
 interface OwnProps {
@@ -45,7 +45,7 @@ const mapState = (state: AllStates): StateProps => {
 };
 
 const mapDispatch = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
-	signIn: (signInModel: SignInModel) => dispatch(signInAsync(signInModel)),
+	signIn: (signInModel: SignInModel) => dispatch(signInAsyncAction(signInModel)),
 });
 
 const AuthScreen = connect(

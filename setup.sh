@@ -17,7 +17,7 @@ cd $projectName
 projectDir=$(pwd)
 packagePath="${projectId//./$'/'}"
 
- set app region
+# set app region
 region="Constant.LOCALE_FA"
 if [ "$appRegion" == "en" ]; then
 region="Constant.LOCALE_EN"

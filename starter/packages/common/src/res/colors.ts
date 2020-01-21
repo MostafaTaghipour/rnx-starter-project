@@ -6,6 +6,7 @@ export default {
 	black: '#000000',
 	gray: '#808080',
 	silver: '#C0C0C0',
+	white_smoke: '#F1F1F1',
 	white: '#FFFFFF',
 	fuchsia: '#FF00FF',
 	purple: '#800080',
@@ -58,7 +59,7 @@ export default {
 	},
 
 	get text(): string {
-		return this.black;
+		return "#272727";
 	},
 
 	textLighten(value: number): string {

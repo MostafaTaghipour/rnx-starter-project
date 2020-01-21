@@ -27,7 +27,7 @@ export interface State {}
 
 const mapState = (state: AllStates, props: OwnProps): StateProps => {
 	const { id } = props.navigation.state.params;
-	const movie: Movie | undefined = state.movie.movies.find(it => it.id == id);
+	const movie: Movie | undefined = state.movie.movies.data ? state.movie.movies.data.find(it => it.id == id) : undefined;
 	return {
 		movie: movie,
 	};

@@ -11,6 +11,7 @@ import storage from 'redux-persist/lib/storage';
 import { appReducer } from './app/reducer';
 import { AuthState } from './auth/types';
 import { authReducer } from './auth/reducer';
+import { AsyncActionStatus } from './helpers';
 
 
 
@@ -23,13 +24,10 @@ export interface AllStates {
 }
 
 
-const rootReducer = combineReducers<AllStates>({
-	//@ts-ignore
+const rootReducer = combineReducers({
 	app : appReducer,
-	//@ts-ignore
 	auth : authReducer,
 	ui: uiReducer,
-	//@ts-ignore
 	movie: movieReducer,
 });
 
@@ -38,14 +36,43 @@ const rootReducer = combineReducers<AllStates>({
 /* #region  MiddleWares */
 let middleWares: Middleware[] = [thunk];
 
+
 /* #region  Logger */
+const actionTransformer = (action: any) => {
+	const status = action.status as AsyncActionStatus;
+	if (status) {
+		action.type = `${action.type}_${status}`;
+	}
+	return action;
+};
+
+const titleFormatter = (action: any, time: string, took: number): string => {
+	const parts = ['action => '];
+
+	var type = action.type;
+	const status = action.status as AsyncActionStatus;
+	if (status) {
+		type = `${type}_${status}`;
+	}
+
+	parts.push(`${String(type)}`);
+	parts.push(`@ ${time}`);
+	parts.push(`(in ${took.toFixed(2)} ms)`);
+
+	return parts.join(' ');
+};
+
 const logger = createLogger({
+	//actionTransformer,
+	titleFormatter,
 	// ...options
 });
-if (__DEV__ === true) {
+if (__DEV__) {
 	middleWares.push(logger);
 }
 /* #endregion */
+
+
 
 /* #endregion */
 

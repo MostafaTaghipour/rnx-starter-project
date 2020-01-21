@@ -32,7 +32,7 @@ export default {
 	androidRipple: false,
 	androidRippleColor: undefined,
 	androidRippleColorDark: undefined,
-	btnUppercaseAndroidText: false,
+	// btnUppercaseAndroidText: false,
 
 	// Badge
 	badgeBg: '#ED1727',
@@ -314,8 +314,8 @@ export default {
 	get inverseTextColor() {
 		return R.colors.inverseText;
 	},
-	textAlign: 'auto',
-	textAlignSelf: 'auto',
+	// textAlign: 'auto',
+	// textAlignSelf: 'auto',
 	noteFontSize: 14,
 	get textDirection() {
 		return Locale.isRTL ? 'rtl' : 'ltr';
@@ -369,5 +369,5 @@ export default {
 		get hrTextColor() {
 			return R.colors.text;
 		},
-	
+
 };

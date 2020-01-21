@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <!-- to generate fav icon use this site https://www.favicon-generator.org/ -->
+    <title>starter</title>
+
+    <!-- PWA icons to apple devices; to generate icon use this site https://www.favicon-generator.org/ -->
     <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/img/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/img/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/img/apple-icon-72x72.png">
@@ -23,15 +24,33 @@
     <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/img/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/img/favicon-16x16.png">
 
+    <!-- PWA icons to apple devices; to generate icon use this site https://appsco.pe/developer/splash-screens -->
+    <!-- <link rel="apple-touch-startup-image" href="launch.png"> -->
+
+    <!-- Other browser required meta tags for PWA apps -->
     <meta name="theme-color" content="#ffffff" />
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="%PUBLIC_URL%/img/ms-icon-144x144.png">
+    <meta name="apple-mobile-web-app-capable" content="true"> <!-- Sets whether a web application runs in full-screen mode; or you can use manifest.json display propety to set it -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">  <!-- iOS status bar style of your progressive web app (modes: default, black, black-translucent) -->
+    <meta name="apple-mobile-web-app-title" content="starter"> <!-- The title of your PWA will be shown below its launch icon on the home screen; or you can use manifest.json short_name propety to set it -->
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+   
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="%PUBLIC_URL%/img/favicon.ico" type="image/x-icon">
+
+
+    <!-- resolve export issue -->
+    <script> var exports = {}; </script>
+
+
+     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -39,11 +58,7 @@
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>starter</title>
-<!-- resolve export issue -->
-    <script> var exports = {}; </script>
- 
+    --> 
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

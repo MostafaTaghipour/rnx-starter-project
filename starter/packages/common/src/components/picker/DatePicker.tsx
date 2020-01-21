@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Input, View, Button, Icon, Text } from 'native-base';
-import { StyleProp, ViewStyle, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { StyleProp, ViewStyle,  TouchableWithoutFeedback } from 'react-native';
 import { NavigationScreenProp, SafeAreaView, NavigationScreenProps } from 'react-navigation';
 import { FieldProps, IconProps, PickerType } from './types';
 import styles, {
@@ -22,17 +22,21 @@ import Constant from '@app/configs/const';
 import R from '@app/res/R';
 import Calendar from '@app/components/calendar';
 import Locale from '@app/configs/locales';
-import { showNativeAlert } from '@app/helpers/uiHelper';
+import { showNativeAlert } from '@app/helpers/messageHelper';
 import { isNightMode } from '@app/configs/theme';
+import router from '@app/navigators/router';
+import { calenderDateToMoment, prettyDateFormat } from '@app/helpers/dateHelper';
+import TouchableOpacity from '../TouchableOpacity';
 
 //----------------------------------------- Field ------------------------------------
 
+
 interface ContainerProps {
 	containerStyle?: StyleProp<ViewStyle>;
-	navigation: NavigationScreenProp<any, any>;
 	pickerType?: 'modal' | 'dialog' | 'bottomSheet';
 	locale?: 'en' | 'fa';
 	format?: string;
+	routeName: string;
 	min?: CalendarDate;
 	max?: CalendarDate;
 	selected?: CalendarDate;
@@ -76,18 +80,19 @@ export default class DatePickerField extends React.Component<Props, State> {
 		const selected = this.state.selected;
 		const gesturesEnabled = this.props.gesturesEnabled;
 
-		this.props.navigation.navigate('datePickerModal', {
-			returnData: this.returnData.bind(this),
-			pickerType,
-			locale: this.locale,
+		router.datePicker(
+			this.props.routeName,
+			this.locale,
+			gesturesEnabled,
 			min,
 			max,
+			selected,
 			today,
 			ok,
 			cancel,
-			selected,
-			gesturesEnabled,
-		});
+			pickerType,
+			this.returnData.bind(this)
+		);
 	}
 
 	returnData(value: CalendarDate) {
@@ -107,15 +112,7 @@ export default class DatePickerField extends React.Component<Props, State> {
 								editable={false}
 								value={
 									this.state.selected
-										? moment
-												.from(
-													`${this.state.selected.year}-${this.state.selected.month}-${
-														this.state.selected.day
-													}`,
-													this.locale,
-													defaultFormat
-												)
-												.format(this.format)
+										? calenderDateToMoment(this.state.selected, this.locale).format(this.format)
 										: ''
 								}
 								style={[fieldStyle(), this.props.fieldStyle]}
@@ -229,9 +226,7 @@ export class DatePickerModalScreen extends React.Component<ModalProps, ModalStat
 											)}
 										>
 											{this.state.dateContext
-												? this.state.dateContext.format(
-														Locale.isPersian ? 'dddd، D MMMM' : 'dddd, MMMM D'
-												  )
+												? this.state.dateContext.format(prettyDateFormat())
 												: ''}
 										</Text>
 									</TouchableOpacity>

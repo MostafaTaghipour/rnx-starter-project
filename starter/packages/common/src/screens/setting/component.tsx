@@ -12,6 +12,7 @@ import {
 	Switch,
 	Text,
 	Separator,
+	
 } from 'native-base';
 import React from 'react';
 import { Props, State } from '.';
@@ -23,7 +24,9 @@ import Constant from '@app/configs/const';
 import R from '@app/res/R';
 import { restartApp } from '@app/helpers/appHelpers';
 import PickerField from '@app/components/picker/Picker';
-
+import routeNames from '@app/navigators/routeNames';
+import { prettyDateFormat } from '@app/helpers/dateHelper';
+import { View } from 'react-native';
 
 export default class SettingComponent extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -36,7 +39,8 @@ export default class SettingComponent extends React.Component<Props, State> {
 
 	render() {
 		return (
-			<Container>
+	
+			<Container >
 				<Header>
 					<Left>
 						<MenuButton navigation={this.props.navigation} />
@@ -46,12 +50,12 @@ export default class SettingComponent extends React.Component<Props, State> {
 					</Body>
 					<Right />
 				</Header>
-				<Content>
-					<ListItem itemDivider style={{height:40}}/>
+				<Content >
+					<ListItem itemDivider style={{ height: 40 }} />
 					<ListItem icon>
 						<Left>
 							<Button style={{ backgroundColor: R.colors.navy }}>
-								<Icon active name={R.icons('moon')} />
+								<Icon active name={R.ionIcons('moon')} />
 							</Button>
 						</Left>
 						<Body>
@@ -76,17 +80,17 @@ export default class SettingComponent extends React.Component<Props, State> {
 					<ListItem icon last>
 						<Left>
 							<Button style={{ backgroundColor: R.colors.brand }}>
-								<Icon active name={R.icons('globe')} />
+								<Icon active name={R.ionIcons('globe')} />
 							</Button>
 						</Left>
 						<Body>
 							<PickerField
 								containerStyle={{ marginEnd: 10, marginStart: 5 }}
-								navigation={this.props.navigation}
 								placeholder={R.strings('settings.select_locale')}
 								pickerType="bottomSheet"
 								iconName="ios-arrow-down"
 								data={this.state.locales}
+								routeName={routeNames.LANGUAGE_PICKER}
 								selectedItem={
 									this.props.locale == Constant.LOCALE_FA
 										? R.strings('settings.persian')
@@ -111,26 +115,24 @@ export default class SettingComponent extends React.Component<Props, State> {
 							/>
 						</Body>
 					</ListItem>
-					<ListItem itemDivider style={{height:40}}/>
+					<ListItem itemDivider style={{ height: 40 }} />
 					<ListItem icon last>
 						<Left>
 							<Button style={{ backgroundColor: R.colors.orange }}>
-								<Icon active name={R.icons('calendar')} />
+								<Icon active name={R.ionIcons('calendar')} />
 							</Button>
 						</Left>
 						<Body>
 							<DatePickerField
 								containerStyle={{ marginEnd: 10, marginStart: 5 }}
 								locale={Locale.current == Constant.LOCALE_FA ? 'fa' : 'en'}
-								navigation={this.props.navigation}
 								placeholder={R.strings('settings.select_date')}
 								pickerType="dialog"
+								routeName={routeNames.DATE_PICKER}
 								okButtonTitle={R.strings('ok')}
 								cancelButtonTitle={R.strings('cancel')}
 								todayButtonTitle={R.strings('today')}
-								format={
-									Locale.current == Constant.LOCALE_FA ? 'dddd، Do MMMM YYYY' : 'dddd, MMMM Do YYYY'
-								}
+								format={prettyDateFormat()}
 								iconName="ios-arrow-down"
 								selected={this.state.datePickerSelected}
 								// min={{
@@ -151,6 +153,7 @@ export default class SettingComponent extends React.Component<Props, State> {
 					</ListItem>
 				</Content>
 			</Container>
+		
 		);
 	}
 }

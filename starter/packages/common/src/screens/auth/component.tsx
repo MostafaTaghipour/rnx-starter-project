@@ -4,7 +4,7 @@ import { Props, State } from '.';
 import style from './style';
 import { ActivityIndicator } from 'react-native';
 import Constant from '@app/configs/const';
-import { NativeToast } from '@app/helpers/uiHelper';
+import { NativeToast } from '@app/helpers/messageHelper';
 import R from '@app/res/R';
 import { getAppThemeType, ThemeType } from '@app/configs/theme';
 

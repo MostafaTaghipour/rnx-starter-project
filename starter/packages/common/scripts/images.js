@@ -57,7 +57,7 @@ const generate = () => {
 			res = `get ${item.name}() {
 					return CurrentDevice.Platform.isAndroid
 					? { uri: '_common_src_res_images_${item.name}' }
-					: require('@app/res/images/${item.name}${item.ext}');
+					: { uri: '${item.name}' };
 				}`;
 			// }
 

@@ -1,11 +1,11 @@
 import { AuthActionTypes, SignInModel } from './types';
 import { store } from '@app/store';
 import { ToastConfiguration } from '@app/types';
-import { showToast } from '@app/store/ui/actions';
+import { showToastAction } from '@app/store/ui/actions';
 import R from '@app/res/R';
 
 
-export const signInAsync = (signInModel : SignInModel) => {
+export const signInAsyncAction = (signInModel : SignInModel) => {
 	return (dispatch: any) => {
 		//@ts-ignore
 		if (!store.getState().app.isConnectToInternet) return;
@@ -28,7 +28,7 @@ export const signInAsync = (signInModel : SignInModel) => {
 					textStyle: { fontFamily: R.fonts.default, textAlign: 'center' },
 					type: 'danger',
 				};
-				dispatch(showToast(toast));
+				dispatch(showToastAction(toast));
 			} else {
 				dispatch({
 					type: AuthActionTypes.AUTHENTICATION_SUCCESS,
