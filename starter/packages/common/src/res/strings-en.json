@@ -10,12 +10,17 @@
   "today": "Today",
   "offline_mode_desc": "You are offline",
   "welcome_msg": "Welcome to starter!",
+  "try_again": "Try again",
+  "no_item_exist":"No item exist",
   "error": {
+    "no_internet": "No internet connection",
     "general": "Something wrong!",
     "required": "This field required",
     "invalid_email": "Invalid email address",
     "invalid_password": "Minimum 5 character required",
-    "invalid_form": "Some fields are incorrect"
+    "invalid_form": "Some fields are incorrect",
+    "loading_error": "Error in fetching data!",
+    "please_try_again": "Please try again"
   },
   "auth": {
     "email": "Email",

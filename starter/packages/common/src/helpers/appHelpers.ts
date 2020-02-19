@@ -4,6 +4,7 @@ import RNRestart from 'react-native-restart';
 import { Linking } from 'react-native';
 import Locale from '@app/configs/locales';
 import Constant from '@app/configs/const';
+import configs from '@app/configs';
 
 
 
@@ -21,7 +22,7 @@ export const openUrl = (url?: string) => {
 		if (supported) {
 			Linking.openURL(urlStr);
 		} else {
-			if (__DEV__) "Don't know how to open URI: " + url;
+			if (configs.isDebugMode) "Don't know how to open URI: " + url;
 		}
 	});
 };

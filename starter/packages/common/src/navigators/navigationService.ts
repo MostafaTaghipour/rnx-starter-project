@@ -8,6 +8,7 @@ import {
 	NavigationResetActionPayload,
 	StackActions,
 } from 'react-navigation';
+import configs from '@app/configs';
 
 let _navigator: NavigationContainerComponent;
 
@@ -92,7 +93,7 @@ function trackingNavigationStateChange(
 	const prevScreen = getActiveRoute(prevNavigationState);
 	const currentRoute = getActiveRouteStack(nextNavigationState);
 
-	if (__DEV__ && (action.type === 'Navigation/NAVIGATE' || action.type === 'Navigation/BACK'))
+	if (configs.isDebugMode && (action.type === 'Navigation/NAVIGATE' || action.type === 'Navigation/BACK'))
 		//@ts-ignore
 		console.log(currentRoute.map(x => x.routeName).join(' > '));
 

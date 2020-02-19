@@ -10,7 +10,18 @@ export enum DeviceOS {
 	iOS = 'ios',
 	Android = 'android',
 	Windows = 'window',
+	WindowsPhone = 'windowPhone',
 	Linux = 'linux',
+	Unknown = 'unknown',
+}
+
+export enum BrowserType {
+	Edge = 'edge',
+	Opera = 'opera',
+	Chrome = 'chrome',
+	IE = 'ie',
+	Firefox = 'firefox',
+	Safari = 'safari',
 	Unknown = 'unknown',
 }
 
@@ -57,6 +68,7 @@ export default class CurrentDevice {
 					platform = window.navigator.platform,
 					macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
 					windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+					windowsPhonePlatforms = ['windows phone', 'windows mobile'],
 					iosPlatforms = ['iPhone', 'iPad', 'iPod'],
 					os = null;
 
@@ -66,6 +78,9 @@ export default class CurrentDevice {
 				} else if (iosPlatforms.indexOf(platform) !== -1) {
 					os = 'iOS';
 					return DeviceOS.iOS;
+				} else if (windowsPhonePlatforms.indexOf(platform) !== -1) {
+					os = 'Windows phone';
+					return DeviceOS.WindowsPhone;
 				} else if (windowsPlatforms.indexOf(platform) !== -1) {
 					os = 'Windows';
 					return DeviceOS.Windows;
@@ -82,6 +97,32 @@ export default class CurrentDevice {
 		}
 	};
 
+	static Browser = class {
+		static get type(): BrowserType {
+			var userAgent =
+				//@ts-ignore
+				navigator.userAgent.toLowerCase() || navigator.vendor.toLowerCase() || window.opera;
+
+			switch (true) {
+				case userAgent.indexOf('edge') > -1:
+					return BrowserType.Edge;
+				//@ts-ignore
+				case userAgent.indexOf('opr') > -1 && !!window.opr:
+					return BrowserType.Opera;
+				//@ts-ignore
+				case userAgent.indexOf('chrome') > -1 && !!window.chrome:
+					return BrowserType.Chrome;
+				case userAgent.indexOf('trident') > -1:
+					return BrowserType.IE;
+				case userAgent.indexOf('firefox') > -1:
+					return BrowserType.Firefox;
+				case userAgent.indexOf('safari') > -1:
+					return BrowserType.Safari;
+				default:
+					return BrowserType.Unknown;
+			}
+		}
+	};
 	static Dimension = class {
 		static get width(): number {
 			return Math.round(Dimensions.get('window').width);

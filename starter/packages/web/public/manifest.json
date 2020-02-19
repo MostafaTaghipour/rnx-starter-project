@@ -46,9 +46,14 @@
       "sizes": "192x192",
       "type": "image\/png",
       "density": "4.0"
+    },
+    {
+      "src": "\/img\/512x512.png",
+      "sizes": "512x512",
+      "type": "image\/png"
     }
   ],
-  "prefer_related_applications": "true",
+  "prefer_related_applications": true,
   "related_applications": [
     {
       "platform": "play",

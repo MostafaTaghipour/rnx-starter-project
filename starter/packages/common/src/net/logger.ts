@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
+import configs from '@app/configs';
 
 const subtitleStyle = 'color: gray; font-weight:bold; padding:5px;';
 const errorStyle = 'color: red; font-weight:light; padding:5px;';
@@ -8,7 +9,7 @@ const titleStyleFailed =
 	' border: 1px solid red ; padding : 10px;  ; color: red; display: block;font-weight:bold;font-size:12px;';
 
 const requestInterceptor = (request: AxiosRequestConfig) => {
-	if (!__DEV__) return request;
+	if (configs.isReleaseMode) return request;
 
 	try {
 
@@ -55,7 +56,7 @@ const requestInterceptor = (request: AxiosRequestConfig) => {
 	return request;
 };
 const responseInterceptor = (response: AxiosResponse) => {
-	if (!__DEV__) return response;
+	if (configs.isReleaseMode) return response;
 
 	const URL = response.config.url;
 	console.group(
@@ -91,7 +92,7 @@ const errorInterceptor = (err: AxiosError) => {
 };
 
 const logError = (err: AxiosError<any>, isRequest = false) => {
-	if (!__DEV__) return;
+	if (configs.isReleaseMode) return;
 
 	try {
 		const URL = `${err.request._url}`;

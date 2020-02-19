@@ -11,20 +11,21 @@ import {
 	Button,
 	H3,
 } from 'native-base';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Props, State, NavigationProps } from '.';
 import { Image } from 'react-native';
 import BackButton from '@app/components/BackButton';
 import commonStyles from '@app/res/styles/common-styles';
 import configs from '@app/configs';
-
+import { Helmet } from 'react-helmet';
+import CurrentDevice from '@app/configs/device';
 
 export class DetailComponent extends React.Component<Props, State> {
 	static navigationOptions = ({ navigation }: NavigationProps) => ({
 		header: (
 			<Header>
 				<Left>
-					<BackButton  />
+					<BackButton />
 				</Left>
 				<Body>
 					<Title>{navigation.state.params ? navigation.state.params.title : ''}</Title>
@@ -32,7 +33,6 @@ export class DetailComponent extends React.Component<Props, State> {
 				<Right />
 			</Header>
 		),
-		
 	});
 
 	_setNavigationParams() {
@@ -67,9 +67,17 @@ export class DetailComponent extends React.Component<Props, State> {
 			content = <View />;
 		}
 		return (
-			<Container>
-				<Content contentContainerStyle={commonStyles.containerCenter}>{content}</Content>
-			</Container>
+			<Fragment>
+				{CurrentDevice.Platform.isWeb && (
+					<Helmet>
+						<title>{this.props.movie ? this.props.movie!!.title : ''}</title>
+					</Helmet>
+				)}
+
+				<Container>
+					<Content contentContainerStyle={commonStyles.containerCenter}>{content}</Content>
+				</Container>
+			</Fragment>
 		);
 	}
 }

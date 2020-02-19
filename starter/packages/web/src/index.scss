@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* make root full height */
+body, html, #root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* position: relative; */
+}
+
+/* remove chrome outline */
+*:focus {
+  outline: none;
+}
+
+/* resolve native base 'Root' element issue */
+[aria-label="root-view"] ~ div:not([style*='opacity']){
+  display: none!important;
+ }
+
+
+/* resolve tab bar opacity issue */
+div[style=""]{
+  opacity: 1!important;
+ }
+
+
+/* ScrollBar in dark mode */
+div[aria-label*="theme-mode = dark"]{
+
+  div::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  div::-webkit-scrollbar-track {
+    background: #292929; 
+  }
+
+  div::-webkit-scrollbar-thumb {
+    background: #0c0c0c; 
+    border:1px solid #292929;
+  }
+}
+
+div[aria-label*="theme = apple-theme; theme-mode = dark;"] div::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+}
+
+
+
+
+/***** BEGIN INSTRUCTIONS ******/
+
+#instruction-section{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #0000009e;
+  z-index: 9999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+
+  .instruction-body{
+    background: #f1f1f1;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: left;
+    direction: ltr;
+
+    .instruction-content{
+      margin:  1rem 0;
+      border-radius: 1rem;
+      display: none;
+      max-width: 100%;
+    }
+   
+    button{
+      float: right;
+      margin-top: 10px;
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-right: -10px;
+      color: rgb(5, 92, 223);
+    }
+  }
+}
+
+
+
+/***** END INSTRUCTIONS ******/

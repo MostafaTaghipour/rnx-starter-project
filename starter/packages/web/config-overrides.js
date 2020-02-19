@@ -2,6 +2,7 @@ const { override, babelInclude, addWebpackAlias } = require('customize-cra');
 const path = require('path');
 const webpack = require('webpack');
 const fs = require('fs');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -56,14 +57,20 @@ const extraConfigs = config => {
 	return config;
 };
 
-const sourceMapConfigs = config => {
-	const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+const swConfig = config => {
+	
+	config.plugins = config.plugins.map(plugin => {
+	
+		
+		if (plugin.constructor.name === 'GenerateSW') {
 
-	// Load source maps in dev mode
-	if (isDev) {
-		config = { ...config, ...{ devtool: 'cheap-module-eval-source-map' } };
-	}
-
+			return new WorkboxWebpackPlugin.InjectManifest({
+				swSrc: './src/custom-service-worker.js',
+				swDest: 'service-worker.js',
+			});
+		}
+		return plugin;
+	});
 	return config;
 };
 
@@ -94,5 +101,6 @@ module.exports = override(
 	addWebpackAlias({
 		['@app']: path.resolve('../common/src'),
 	}),
-	extraConfigs
+	extraConfigs,
+	swConfig
 );

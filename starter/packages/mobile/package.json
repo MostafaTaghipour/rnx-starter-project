@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start",
-    "start:reset": "react-native start  --reset-cache",
+    "start-packager": "react-native start",
+    "start-packager:reset": "react-native start  --reset-cache",
     "ios": "react-native run-ios",
     "ios:release": "react-native run-ios --configuration Release",
     "ios:dev": "react-native run-ios --scheme starter-development",

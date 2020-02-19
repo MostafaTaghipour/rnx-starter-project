@@ -12,11 +12,12 @@ import { getAppStyle, getAppThemeType } from '@app/configs/theme';
 import Toaster from '@app/components/Toaster';
 import R from '@app/res/R';
 import navigationService from '@app/navigators/navigationService';
-import SplashComponent from '../splash/component';
-import Constant from '@app/configs/const';
-import configs from '@app/configs';
+import { Helmet } from 'react-helmet';
 
 export default class RootComponent extends React.Component<Props, State> {
+	initHeight: number = 0;
+	initWidth: number = 0;
+
 	constructor(props: Props) {
 		super(props);
 
@@ -28,11 +29,12 @@ export default class RootComponent extends React.Component<Props, State> {
 	}
 
 	componentDidMount() {
-		
 		if (CurrentDevice.Platform.isNative) {
 			SplashScreen.hide();
 		}
 		Reachability.getInstance().registerForConnectionChange();
+		this.initHeight = CurrentDevice.Dimension.height;
+		this.initWidth = CurrentDevice.Dimension.width;
 	}
 
 	componentWillUnmount() {
@@ -49,8 +51,10 @@ export default class RootComponent extends React.Component<Props, State> {
 	}
 
 	onLayout(e: LayoutChangeEvent) {
-		const isLandscape = CurrentDevice.Dimension.width > CurrentDevice.Dimension.height;
-		if (this.props.isLandscape != isLandscape) this.props.setLandscapeState(isLandscape);
+		if (CurrentDevice.Platform.isNative) {
+			const isLandscape = CurrentDevice.Dimension.width > CurrentDevice.Dimension.height;
+			if (this.props.isLandscape != isLandscape) this.props.setLandscapeState(isLandscape);
+		}
 
 		const size = CurrentDevice.Dimension.size;
 		if (this.props.screenSize != size) this.props.setScreenSize(size);
@@ -69,6 +73,18 @@ export default class RootComponent extends React.Component<Props, State> {
 						style={{ flex: 1 }}
 						onLayout={this.onLayout.bind(this)}
 					>
+						{CurrentDevice.Platform.isWeb && (
+							<Helmet>
+								<html lang={Locale.current} />
+								<meta name="description" content="this is a good site" />
+								<script type="application/ld+json">{`
+									{
+										"@context": "http://schema.org"
+									}
+								`}</script>
+							</Helmet>
+						)}
+
 						<RootNavigator
 							// persistenceKey={Constant.NAVIGATION_PERSIST_KEY}
 							// renderLoadingExperimental={() => <SplashComponent />}

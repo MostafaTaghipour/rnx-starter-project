@@ -15,6 +15,7 @@
     "i18n-js": "^3.3.0",
     "jalali-moment": "^3.3.2",
     "native-base": "^2.12.1",
+    "react-helmet": "6.0.0-beta.2",
     "react-native": "0.59.5",
     "react-native-localize": "^1.1.3",
     "react-native-restart": "^0.0.10",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@types/color": "^3.0.0",
     "@types/history": "^4.7.3",
+    "@types/react-helmet": "^5.0.15",
     "@types/react-native": "0.57.38",
     "@types/react-navigation": "2.x",
     "@types/react-redux": "^7.1.0",

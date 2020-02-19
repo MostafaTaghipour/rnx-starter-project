@@ -12,6 +12,7 @@ import { appReducer } from './app/reducer';
 import { AuthState } from './auth/types';
 import { authReducer } from './auth/reducer';
 import { AsyncActionStatus } from './helpers';
+import configs from '@app/configs';
 
 
 
@@ -67,7 +68,7 @@ const logger = createLogger({
 	titleFormatter,
 	// ...options
 });
-if (__DEV__) {
+if (configs.isDebugMode) {
 	middleWares.push(logger);
 }
 /* #endregion */

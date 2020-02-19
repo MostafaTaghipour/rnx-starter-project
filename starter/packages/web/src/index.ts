@@ -1,6 +1,6 @@
 import { AppRegistry } from 'react-native-web';
 import App from '@proj/common/src/app';
-import './index.css';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 // register the app
