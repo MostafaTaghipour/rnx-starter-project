@@ -1,0 +1,47 @@
+Change App Display Name:
+    - packages/mobile/ios/{proj_folder}/info.plist => CFBundleDisplayName
+    - packages/mobile/android/app/src/main/res/values/strings.xml => app_name
+    - packages/web/public/index.html => <title> tag
+    - packages/web/public/manifest.json => short_name and name
+    - packages/desktop/package.json => productName
+
+Change App Icon:
+    - packages/common/src/res/images/app_icon
+    - packages/mobile/ios/{proj_folder}/Images.xcassets
+    - packages/mobile/android/app/src/main/res/mipmap/ic_launcher
+    - packages/web/public/img/icons
+    - packages/desktop/assets/icons
+
+Change Splash:
+    - packages/common/src/screens/splash
+    - packages/mobile/ios/{proj_folder}/Base.lproj/LaunchScreen.xib
+    - packages/mobile/android/app/src/main/res/drawable/background_splash.xml
+
+Change Fonts:
+    - copy fonts in packages/common/src/res/fonts
+    - link assets
+    - define font family in packages/web/custom-font-loader.js
+
+Icons List:
+    - https://oblador.github.io/react-native-vector-icons/
+
+Add custom icons:
+    - https://www.reactnative.guide/12-svg-icons-using-react-native-vector-icons/12.1-creating-custom-iconset.html
+
+Use SVG files
+    - add react-native-svg library (https://github.com/react-native-community/react-native-svg)
+    - convert svg files to JSX (https://react-svgr.com/playground/?native=true)
+
+Shadow generator
+    - https://ethercreative.github.io/react-native-shadow-generator/
+
+Custom transition libraries
+	- https://github.com/plmok61/react-navigation-transitions
+	- https://github.com/fram-x/FluidTransitions
+	- https://medium.com/async-la/custom-transitions-in-react-navigation-2f759408a053
+
+
+Debugger not work on native:
+    - enable debug js remotely
+    - close chrome debug tabs
+    - hit debug button

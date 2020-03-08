@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": true
+  },
+  "include": [
+    "src",
+    "custom-fonts.js"
+  ],
+  "exclude": [
+    "src/custom-service-worker.js"
+  ]
+}

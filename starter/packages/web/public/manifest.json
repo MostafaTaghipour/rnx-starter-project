@@ -1,0 +1,105 @@
+{
+  "name": "starter - is a good app",
+  "short_name": "starter",
+  "description": "starter is a react native cross platform app",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "direction": "ltr",
+  "lang": "en-US",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "\/img\/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image\/png",
+      "density": "0.75"
+    },
+    {
+      "src": "\/img\/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image\/png",
+      "density": "1.0"
+    },
+    {
+      "src": "\/img\/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image\/png",
+      "density": "1.5"
+    },
+    {
+      "src": "\/img\/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image\/png",
+      "density": "2.0"
+    },
+    {
+      "src": "\/img\/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image\/png",
+      "density": "3.0"
+    },
+    {
+      "src": "\/img\/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image\/png",
+      "density": "4.0"
+    },
+    {
+      "src": "\/img\/512x512.png",
+      "sizes": "512x512",
+      "type": "image\/png"
+    }
+  ],
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.app1",
+      "id": "com.example.app1"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://itunes.apple.com/app/example-app1/id123456789"
+    }
+  ],
+  "serviceworker": {
+    "src": "./serviceworker.js",
+    "scope": ".",
+    "type": "",
+    "update_via_cache": "none"
+  },
+  "screenshots": [
+    {
+      "src": "\/img\/screenshot1.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    },
+    {
+      "src": "\/img\/screenshot2.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    }
+  ],
+  "________comments________": {
+    "name": "Long name of app (e.g. on splash screen)",
+    "short_name": "Short name of app (e.g. below icon)",
+    "start_url": "Which page to load on startup",
+    "scope": "Which pages are included in 'PWA Experience'",
+    "display": "How app look like (modes: fullscreen, standalone(default), minimal-ui, browser) ",
+    "background_color": "Background whilst loading & on splash screen",
+    "theme_color": "Theme color (e.g. on top bar in task switcher)",
+    "description": "Description (e.g. when user add page as favorite)",
+    "dir": "Read direction of your app (modes: auto, ltr, rtl)",
+    "lang": "Main language of your app",
+    "orientation": "Set (and enforce) default orientation of app (modes: any, natural, landscape, landscape-primary, landscape-secondary, portrait, portrait-primary, portrait-secondary)",
+    "icons": "Configures icons (e.g. app icon on home screen) ; you can use https://www.favicon-generator.org/ to generate icons",
+    "categories": "Categories of app, Used as hints for catalogs or stores listing web applications (e.g books, education, medical)",
+    "prefer_related_applications": "Is a boolean value that specifies that applications listed in related_applications should be preferred over the web application. If the prefer_related_applications member is set to true, the user agent might suggest installing one of the related applications instead of this web app.",
+    "related_applications": "Is an array of objects specifying native applications that are installable by, or accessible to, the underlying platform — for example, a native Android application equivalent.",
+    "screenshots": "Defines an array of screenshots intended to showcase the application. These images are intended to be used by progressive web app stores.",
+    "serviceworker": "Describes a service worker that the developer intends to install to control the PWA."
+  }
+}

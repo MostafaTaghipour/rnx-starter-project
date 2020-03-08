@@ -1,0 +1,50 @@
+{
+  "empty_text": "هیچ موردی یافت نشد!",
+  "view": "نمایش",
+  "search_placeholder": "جستجو ...",
+  "picker_place_holder": "انتخاب کنید ...",
+  "ok": "تائید",
+  "cancel": "انصراف",
+  "yes": "بله",
+  "no": "خیر",
+  "today": "امروز",
+  "offline_mode_desc": "شما آفلاین هستید",
+  "welcome_msg": "خوش آمدید!",
+  "try_again": "تلاش مجدد",
+  "no_item_exist":"هیچ موردی یافت نشد",
+  "error": { 
+    "no_internet": "شما دسترسی به اینترنت ندارید",
+    "general": "خطا رخ داده!",
+    "required": "این فیلد الزامی است",
+    "invalid_email": "آدرس ایمیل نامعتبر است",
+    "invalid_password": "حداقل 5 کاراکتر مورد نیاز است",
+    "invalid_form": "برخی از فیلد ها اشتباه هستند",
+    "loading_error": "دریافت اطلاعات با خطا مواجه شد!",
+    "please_try_again": "لطفاً مجددا تلاش نمایید"
+  },
+  "auth": {
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "login": "ورود"
+  },
+  "home": {
+    "title": "خانه",
+    "button_title": "برو به جزئیات"
+  },
+  "settings": {
+    "title": "تنظیمات",
+    "language": "زبان",
+    "date": "تاریخ",
+    "select_locale": "انتخاب زبان ...",
+    "select_date": "انتخاب تاریخ ...",
+    "persian": "فارسی",
+    "english": "انگلیسی",
+    "night_mode" : "حالت تاریک"
+  },
+  "details": {
+    "title": "جزئیات"
+  },
+  "modal": {
+    "text": "این یک مودال است!"
+  }
+}
